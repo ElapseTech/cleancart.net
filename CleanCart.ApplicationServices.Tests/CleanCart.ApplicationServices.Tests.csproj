@@ -40,6 +40,9 @@
     <Reference Include="FluentAssertions">
       <HintPath>..\packages\FluentAssertions.2.2.0.0\lib\net45\FluentAssertions.dll</HintPath>
     </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1312.1622\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -58,11 +61,16 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShopCatalogServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CleanCart.ApplicationServices\CleanCart.ApplicationServices.csproj">
       <Project>{e1c9273c-eab0-4750-bb72-a9d0ab59063a}</Project>
       <Name>CleanCart.ApplicationServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CleanCart.Domain\CleanCart.Domain.csproj">
+      <Project>{44AAA77A-BDDF-4AE5-9509-A08A9EF1FB5B}</Project>
+      <Name>CleanCart.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

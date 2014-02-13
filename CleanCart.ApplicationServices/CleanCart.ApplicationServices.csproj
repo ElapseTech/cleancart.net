@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShopCatalogService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CleanCart.Domain\CleanCart.Domain.csproj">
