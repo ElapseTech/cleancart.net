@@ -7,4 +7,4 @@ Scenario: All items are displayed in the shop catalog
 	Given A shop a catalog
 	And Some items in the catalog
 	When I visit the catalog
-	Then all items are shown
+	Then all items' title are shown

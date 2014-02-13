@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CleanCart.Domain
 {
-    public class Class1
+    public class StandardCatalogItem : ICatalogItem
     {
     }
 }
