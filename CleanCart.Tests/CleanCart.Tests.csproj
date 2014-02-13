@@ -108,9 +108,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CleanCart\CleanCart.csproj">
+    <ProjectReference Include="..\CleanCart.Web\CleanCart.Web.csproj">
       <Project>{2A8359C3-C775-4A77-8E9F-26FECD679908}</Project>
-      <Name>CleanCart</Name>
+      <Name>CleanCart.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
