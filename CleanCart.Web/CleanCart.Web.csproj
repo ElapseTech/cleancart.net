@@ -159,6 +159,16 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CleanCart.ApplicationServices\CleanCart.ApplicationServices.csproj">
+      <Project>{e1c9273c-eab0-4750-bb72-a9d0ab59063a}</Project>
+      <Name>CleanCart.ApplicationServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CleanCart.Domain\CleanCart.Domain.csproj">
+      <Project>{44aaa77a-bddf-4ae5-9509-a08a9ef1fb5b}</Project>
+      <Name>CleanCart.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

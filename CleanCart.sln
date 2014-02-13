@@ -14,6 +14,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6863AF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCart.AcceptanceTests", "CleanCart.AcceptanceTests\CleanCart.AcceptanceTests.csproj", "{AF0F6353-9345-4308-8036-8F485F905D86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCart.Domain", "CleanCart.Domain\CleanCart.Domain.csproj", "{44AAA77A-BDDF-4AE5-9509-A08A9EF1FB5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCart.Domain.Tests", "CleanCart.Domain.Tests\CleanCart.Domain.Tests.csproj", "{723C9497-2A2D-45F3-82E8-10839E518E35}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCart.ApplicationServices.Tests", "CleanCart.ApplicationServices.Tests\CleanCart.ApplicationServices.Tests.csproj", "{1DF553A3-A5F5-40D1-89E1-25A29E11C2F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCart.ApplicationServices", "CleanCart.ApplicationServices\CleanCart.ApplicationServices.csproj", "{E1C9273C-EAB0-4750-BB72-A9D0AB59063A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +40,22 @@ Global
 		{AF0F6353-9345-4308-8036-8F485F905D86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF0F6353-9345-4308-8036-8F485F905D86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF0F6353-9345-4308-8036-8F485F905D86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44AAA77A-BDDF-4AE5-9509-A08A9EF1FB5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44AAA77A-BDDF-4AE5-9509-A08A9EF1FB5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44AAA77A-BDDF-4AE5-9509-A08A9EF1FB5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44AAA77A-BDDF-4AE5-9509-A08A9EF1FB5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{723C9497-2A2D-45F3-82E8-10839E518E35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{723C9497-2A2D-45F3-82E8-10839E518E35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{723C9497-2A2D-45F3-82E8-10839E518E35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{723C9497-2A2D-45F3-82E8-10839E518E35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DF553A3-A5F5-40D1-89E1-25A29E11C2F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DF553A3-A5F5-40D1-89E1-25A29E11C2F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DF553A3-A5F5-40D1-89E1-25A29E11C2F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DF553A3-A5F5-40D1-89E1-25A29E11C2F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1C9273C-EAB0-4750-BB72-A9D0AB59063A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1C9273C-EAB0-4750-BB72-A9D0AB59063A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1C9273C-EAB0-4750-BB72-A9D0AB59063A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1C9273C-EAB0-4750-BB72-A9D0AB59063A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
