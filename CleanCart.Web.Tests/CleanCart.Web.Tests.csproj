@@ -105,6 +105,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ShopCatalogControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +115,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CleanCart.ApplicationServices\CleanCart.ApplicationServices.csproj">
+      <Project>{E1C9273C-EAB0-4750-BB72-A9D0AB59063A}</Project>
+      <Name>CleanCart.ApplicationServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CleanCart.Domain\CleanCart.Domain.csproj">
+      <Project>{44aaa77a-bddf-4ae5-9509-a08a9ef1fb5b}</Project>
+      <Name>CleanCart.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CleanCart.Web\CleanCart.Web.csproj">
       <Project>{2A8359C3-C775-4A77-8E9F-26FECD679908}</Project>
       <Name>CleanCart.Web</Name>

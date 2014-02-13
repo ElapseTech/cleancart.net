@@ -4,7 +4,7 @@ using CleanCart.Domain;
 
 namespace CleanCart.ApplicationServices
 {
-    public class ShopCatalogService
+    public class ShopCatalogService : IShopCatalogService
     {
         private readonly ICatalogItemRepository _catalogItemRepository;
 

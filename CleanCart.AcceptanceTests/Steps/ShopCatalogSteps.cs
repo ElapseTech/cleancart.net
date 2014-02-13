@@ -1,4 +1,5 @@
-﻿using CleanCart.Controllers;
+﻿using CleanCart.ApplicationServices;
+using CleanCart.Controllers;
 using CleanCart.Domain;
 using CleanCart.Persistence.FakeInMemory;
 using CleanCart.ViewModels.ShopCatalog;
@@ -34,7 +35,8 @@ namespace CleanCart.AcceptanceTests.Steps
         [When(@"I visit the catalog")]
         public void WhenIVisitTheCatalog()
         {
-            var shopCatalogController = new ShopCatalogController();
+            var shopCatalogService = new ShopCatalogService(_catalogItemRepository);
+            var shopCatalogController = new ShopCatalogController(shopCatalogService);
             _shopCatalogViewResult = shopCatalogController.Index();
         }
 
