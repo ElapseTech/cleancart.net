@@ -1,12 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Web.Mvc;
-using CleanCart.AcceptanceTests.Fakes;
-using CleanCart.Controllers;
+﻿using CleanCart.Controllers;
 using CleanCart.Domain;
+using CleanCart.Persistence.FakeInMemory;
 using CleanCart.ViewModels.ShopCatalog;
 using FluentAssertions;
+using System;
+using System.Linq;
+using System.Web.Mvc;
 using TechTalk.SpecFlow;
 
 namespace CleanCart.AcceptanceTests.Steps

@@ -91,7 +91,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Fakes\MemoryCatalogItemRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Features\SH1_DisplayShopCatalog.feature.cs">
       <AutoGen>True</AutoGen>
@@ -116,6 +115,10 @@
     <ProjectReference Include="..\CleanCart.Domain\CleanCart.Domain.csproj">
       <Project>{44aaa77a-bddf-4ae5-9509-a08a9ef1fb5b}</Project>
       <Name>CleanCart.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CleanCart.Persistence.FakeInMemory\CleanCart.Persistence.FakeInMemory.csproj">
+      <Project>{e1726cb5-79f7-4214-be80-240f8d42e2a4}</Project>
+      <Name>CleanCart.Persistence.FakeInMemory</Name>
     </ProjectReference>
     <ProjectReference Include="..\CleanCart.Web\CleanCart.Web.csproj">
       <Project>{2a8359c3-c775-4a77-8e9f-26fecd679908}</Project>

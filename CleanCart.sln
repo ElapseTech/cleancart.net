@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCart.ApplicationServic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCart.ApplicationServices", "CleanCart.ApplicationServices\CleanCart.ApplicationServices.csproj", "{E1C9273C-EAB0-4750-BB72-A9D0AB59063A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCart.Persistence.FakeInMemory", "CleanCart.Persistence.FakeInMemory\CleanCart.Persistence.FakeInMemory.csproj", "{E1726CB5-79F7-4214-BE80-240F8D42E2A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{E1C9273C-EAB0-4750-BB72-A9D0AB59063A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1C9273C-EAB0-4750-BB72-A9D0AB59063A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1C9273C-EAB0-4750-BB72-A9D0AB59063A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1726CB5-79F7-4214-BE80-240F8D42E2A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1726CB5-79F7-4214-BE80-240F8D42E2A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1726CB5-79F7-4214-BE80-240F8D42E2A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1726CB5-79F7-4214-BE80-240F8D42E2A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
