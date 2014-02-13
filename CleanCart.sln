@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCart", "CleanCart\CleanCart.csproj", "{2A8359C3-C775-4A77-8E9F-26FECD679908}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCart.Web", "CleanCart.Web\CleanCart.Web.csproj", "{2A8359C3-C775-4A77-8E9F-26FECD679908}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCart.Tests", "CleanCart.Tests\CleanCart.Tests.csproj", "{211309E4-70EB-4ACE-889F-BDBF60CEE349}"
 EndProject
