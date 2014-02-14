@@ -1,4 +1,5 @@
 ﻿using CleanCart.ApplicationServices;
+using CleanCart.ApplicationServices.Assemblers;
 using CleanCart.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -18,6 +19,18 @@ namespace CleanCart.Tests.Controllers
             shopCatalogController.Index();
 
             service.Verify(x => x.ListCatalogItems());
+        }
+
+        [TestMethod]
+        [Ignore]
+        public void IndexShouldListAllItems()
+        {
+            var assembler = new Mock<CatalogItemAssembler>();
+            var service = new Mock<IShopCatalogService>();
+            var shopCatalogController = new ShopCatalogController(service.Object);
+
+            shopCatalogController.Index();
+
         }
     }
 }

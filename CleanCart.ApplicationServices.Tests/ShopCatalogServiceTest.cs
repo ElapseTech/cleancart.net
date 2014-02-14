@@ -1,29 +1,58 @@
 ﻿
-using System.Collections.Generic;
+using CleanCart.ApplicationServices.Assemblers;
+using CleanCart.ApplicationServices.Dto;
 using CleanCart.Domain;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Collections.Generic;
 
 namespace CleanCart.ApplicationServices.Tests
 {
     [TestClass]
     class ShopCatalogServiceTest
     {
+        private List<ICatalogItem> _catalogItems;
+        private List<CatalogItemDTO> _itemsDTOs;
+        private Mock<ICatalogItemRepository> _catalogItemRepository;
+        private Mock<CatalogItemAssembler> _assembler;
+        private ShopCatalogService _shopCatalogService;
+
+        [TestInitialize]
+        public void SetupShopCatalogServiceWithFindableItems()
+        {
+            SetupCatalogItemRespositoriesWithSomeItems();
+            SetupAssemblerToConvertCatalogItems();
+            _shopCatalogService = new ShopCatalogService(_catalogItemRepository.Object, _assembler.Object);
+        }
+
+        private void SetupCatalogItemRespositoriesWithSomeItems()
+        {
+            _catalogItems = new List<ICatalogItem>() { };
+
+            _catalogItemRepository = new Mock<ICatalogItemRepository>();
+            _catalogItemRepository.Setup(x => x.FindAll()).Returns(_catalogItems);
+        }
+
+        private void SetupAssemblerToConvertCatalogItems()
+        {
+            _assembler = new Mock<CatalogItemAssembler>();
+            _itemsDTOs = new List<CatalogItemDTO>();
+            _assembler.Setup(x => x.ToDtoList(_catalogItems)).Returns(_itemsDTOs);
+        }
 
         [TestMethod]
-        public void CanListAllCatalogItemsOfTheShop()
+        public void ListItemsShouldFindAllItems()
         {
-            var bacon = new Mock<ICatalogItem>();
-            var egg = new Mock<ICatalogItem>();
-            var catalogItems = new List<ICatalogItem>() {bacon.Object, egg.Object};
-            var catalogItemRepository = new Mock<ICatalogItemRepository>();
-            catalogItemRepository.Setup(x => x.FindAll()).Returns(catalogItems);
-            var shopCatalogService = new ShopCatalogService(catalogItemRepository.Object);
+            _shopCatalogService.ListCatalogItems();
+            _catalogItemRepository.Verify(x => x.FindAll());
+        }
 
-            var itemsReceived = shopCatalogService.ListCatalogItems();
-
-            itemsReceived.Should().BeEquivalentTo(catalogItems);
+        [TestMethod]
+        public void CanListAllCatalogItemsInDTO()
+        {
+            var itemsDTOReturned = _shopCatalogService.ListCatalogItems();
+            itemsDTOReturned.Should().BeEquivalentTo(_itemsDTOs);
         }
     }
 }
