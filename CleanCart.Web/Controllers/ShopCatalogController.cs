@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CleanCart.ApplicationServices;
+using CleanCart.ViewModels.ShopCatalog;
 
 namespace CleanCart.Controllers
 {
@@ -18,9 +19,9 @@ namespace CleanCart.Controllers
 
         public ViewResult Index()
         {
-            _shopCatalogService.ListCatalogItems();
-
-            return View();
+            var catalogItems = _shopCatalogService.ListCatalogItems();
+            var viewModel = new ShopCatalogViewModel {CatalogItems = catalogItems};
+            return View(viewModel);
         }
 
     }

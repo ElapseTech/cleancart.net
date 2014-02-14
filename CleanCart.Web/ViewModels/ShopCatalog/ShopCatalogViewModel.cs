@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using CleanCart.ApplicationServices.Dto;
 
 namespace CleanCart.ViewModels.ShopCatalog
 {
     public class ShopCatalogViewModel
     {
-        public IEnumerable<CatalogItemViewModel> CatalogItems { get; set; }
+        public IEnumerable<CatalogItemDTO> CatalogItems { get; set; }
     }
 }

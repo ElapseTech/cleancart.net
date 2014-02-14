@@ -1,4 +1,5 @@
 ﻿using CleanCart.ApplicationServices;
+using CleanCart.ApplicationServices.Assemblers;
 using CleanCart.Controllers;
 using CleanCart.Domain;
 using CleanCart.Persistence.FakeInMemory;
@@ -14,9 +15,10 @@ namespace CleanCart.AcceptanceTests.Steps
     [Binding]
     class ShopCatalogSteps
     {
-        private readonly String[] _titles = new String[] {"ITEM 1", "item 2"};
+        private readonly String[] _titles = {"ITEM 1", "item 2"};
 
         private MemoryCatalogItemRepository _catalogItemRepository;
+        private readonly CatalogItemAssembler _catalogItemAssembler = new CatalogItemAssembler();
         private ViewResult _shopCatalogViewResult;
 
         [Given(@"A shop a catalog")]
@@ -35,7 +37,7 @@ namespace CleanCart.AcceptanceTests.Steps
         [When(@"I visit the catalog")]
         public void WhenIVisitTheCatalog()
         {
-            var shopCatalogService = new ShopCatalogService(_catalogItemRepository);
+            var shopCatalogService = new ShopCatalogService(_catalogItemRepository, _catalogItemAssembler);
             var shopCatalogController = new ShopCatalogController(shopCatalogService);
             _shopCatalogViewResult = shopCatalogController.Index();
         }
