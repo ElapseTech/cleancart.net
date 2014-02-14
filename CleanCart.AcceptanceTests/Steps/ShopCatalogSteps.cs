@@ -17,14 +17,14 @@ namespace CleanCart.AcceptanceTests.Steps
     {
         private readonly String[] _titles = {"ITEM 1", "item 2"};
 
-        private MemoryCatalogItemRepository _catalogItemRepository;
+        private InMemoryCatalogItemRepository _catalogItemRepository;
         private readonly CatalogItemAssembler _catalogItemAssembler = new CatalogItemAssembler();
         private ViewResult _shopCatalogViewResult;
 
         [Given(@"A shop a catalog")]
         public void GivenAShopACatalog()
         {
-            _catalogItemRepository = new MemoryCatalogItemRepository();
+            _catalogItemRepository = new InMemoryCatalogItemRepository();
         }
 
         [Given(@"Some items in the catalog")]

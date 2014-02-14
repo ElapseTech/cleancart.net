@@ -40,7 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\InMemoryCatalogItem.cs" />
-    <Compile Include="MemoryCatalogItemRepository.cs" />
+    <Compile Include="InMemoryCatalogItemRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,18 +4,18 @@ using CleanCart.Domain;
 
 namespace CleanCart.Persistence.FakeInMemory
 {
-    public class MemoryCatalogItemRepository  : ICatalogItemRepository
+    public class InMemoryCatalogItemRepository  : ICatalogItemRepository
     {
-        private IList<CatalogItem> items = new List<CatalogItem>();  
+        private readonly IList<CatalogItem> _items = new List<CatalogItem>();  
 
         public void Persist(CatalogItem catalogItem)
         {
-            items.Add(catalogItem);
+            _items.Add(catalogItem);
         }
 
         public IList<CatalogItem> FindAll()
         {
-            return items;
+            return _items;
         }
     }
 }
