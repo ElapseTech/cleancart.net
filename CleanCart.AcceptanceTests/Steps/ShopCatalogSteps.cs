@@ -30,8 +30,8 @@ namespace CleanCart.AcceptanceTests.Steps
         [Given(@"Some items in the catalog")]
         public void GivenSomeItemsInTheCatalog()
         {
-            _catalogItemRepository.Persist(new InMemoryCatalogItem());
-            _catalogItemRepository.Persist(new InMemoryCatalogItem());
+            _catalogItemRepository.Persist(new InMemoryCatalogItem(_titles[0]));
+            _catalogItemRepository.Persist(new InMemoryCatalogItem(_titles[1]));
         }
         
         [When(@"I visit the catalog")]
