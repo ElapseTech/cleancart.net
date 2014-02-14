@@ -1,8 +1,8 @@
 ﻿using CleanCart.ApplicationServices;
 using CleanCart.ApplicationServices.Assemblers;
 using CleanCart.Controllers;
-using CleanCart.Domain;
 using CleanCart.Persistence.FakeInMemory;
+using CleanCart.Persistence.FakeInMemory.Entities;
 using CleanCart.ViewModels.ShopCatalog;
 using FluentAssertions;
 using System;
@@ -30,8 +30,8 @@ namespace CleanCart.AcceptanceTests.Steps
         [Given(@"Some items in the catalog")]
         public void GivenSomeItemsInTheCatalog()
         {
-            _catalogItemRepository.Persist(new StandardCatalogItem());
-            _catalogItemRepository.Persist(new StandardCatalogItem());
+            _catalogItemRepository.Persist(new InMemoryCatalogItem());
+            _catalogItemRepository.Persist(new InMemoryCatalogItem());
         }
         
         [When(@"I visit the catalog")]

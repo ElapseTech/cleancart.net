@@ -12,7 +12,7 @@ namespace CleanCart.ApplicationServices.Tests
     [TestClass]
     class ShopCatalogServiceTest
     {
-        private List<ICatalogItem> _catalogItems;
+        private List<CatalogItem> _catalogItems;
         private List<CatalogItemDTO> _itemsDTOs;
         private Mock<ICatalogItemRepository> _catalogItemRepository;
         private Mock<CatalogItemAssembler> _assembler;
@@ -28,7 +28,7 @@ namespace CleanCart.ApplicationServices.Tests
 
         private void SetupCatalogItemRespositoriesWithSomeItems()
         {
-            _catalogItems = new List<ICatalogItem>() { };
+            _catalogItems = new List<CatalogItem>() { };
 
             _catalogItemRepository = new Mock<ICatalogItemRepository>();
             _catalogItemRepository.Setup(x => x.FindAll()).Returns(_catalogItems);

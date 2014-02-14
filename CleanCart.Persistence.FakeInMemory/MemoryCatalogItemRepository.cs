@@ -6,11 +6,11 @@ namespace CleanCart.Persistence.FakeInMemory
 {
     public class MemoryCatalogItemRepository  : ICatalogItemRepository
     {
-        public void Persist(StandardCatalogItem standardCatalogItem)
+        public void Persist(CatalogItem catalogItem)
         {
         }
 
-        public IList<ICatalogItem> FindAll()
+        public IList<CatalogItem> FindAll()
         {
             return null;
         }

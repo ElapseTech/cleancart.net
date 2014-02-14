@@ -5,7 +5,7 @@ namespace CleanCart.Domain
 {
     public interface ICatalogItemRepository
     {
-        void Persist(StandardCatalogItem standardCatalogItem);
-        IList<ICatalogItem> FindAll();
+        void Persist(CatalogItem catalogItem);
+        IList<CatalogItem> FindAll();
     }
 }
