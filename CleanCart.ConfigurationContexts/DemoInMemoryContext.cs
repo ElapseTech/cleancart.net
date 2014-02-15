@@ -2,7 +2,7 @@
 
 namespace CleanCart.ConfigurationContexts
 {
-    class DemoInMemoryContext : ContextBase
+    public class DemoInMemoryContext : ContextBase
     {
         public void Apply()
         {

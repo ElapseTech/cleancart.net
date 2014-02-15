@@ -1,6 +1,6 @@
 ﻿namespace CleanCart.ConfigurationContexts.Configurations
 {
-    internal interface IConfiguration
+    public interface IConfiguration
     {
         void Install();
     }

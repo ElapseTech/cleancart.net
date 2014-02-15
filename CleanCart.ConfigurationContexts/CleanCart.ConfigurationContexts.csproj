@@ -45,6 +45,20 @@
     <Compile Include="Configurations\Persistence\InMemoryPersistenceConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CleanCart.ApplicationServices\CleanCart.ApplicationServices.csproj">
+      <Project>{e1c9273c-eab0-4750-bb72-a9d0ab59063a}</Project>
+      <Name>CleanCart.ApplicationServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CleanCart.Domain\CleanCart.Domain.csproj">
+      <Project>{44aaa77a-bddf-4ae5-9509-a08a9ef1fb5b}</Project>
+      <Name>CleanCart.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CleanCart.Persistence.FakeInMemory\CleanCart.Persistence.FakeInMemory.csproj">
+      <Project>{e1726cb5-79f7-4214-be80-240f8d42e2a4}</Project>
+      <Name>CleanCart.Persistence.FakeInMemory</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

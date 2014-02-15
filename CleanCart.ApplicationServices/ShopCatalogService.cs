@@ -1,7 +1,7 @@
 ﻿using CleanCart.ApplicationServices.Assemblers;
 using CleanCart.ApplicationServices.Dto;
+using CleanCart.ApplicationServices.Locator;
 using CleanCart.Domain;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace CleanCart.ApplicationServices
@@ -10,6 +10,12 @@ namespace CleanCart.ApplicationServices
     {
         private readonly ICatalogItemRepository _catalogItemRepository;
         private readonly CatalogItemAssembler _catalogItemAssembler;
+
+        public ShopCatalogService()
+        {
+            _catalogItemRepository = ServiceLocator.Resolve<ICatalogItemRepository>();
+            _catalogItemAssembler = new CatalogItemAssembler();
+        }
 
         public ShopCatalogService(ICatalogItemRepository catalogItemRepository, CatalogItemAssembler catalogItemAssembler)
         {

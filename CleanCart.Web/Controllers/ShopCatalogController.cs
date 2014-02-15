@@ -12,6 +12,11 @@ namespace CleanCart.Controllers
     {
         private readonly IShopCatalogService _shopCatalogService;
 
+        public ShopCatalogController()
+        {
+            _shopCatalogService = new ShopCatalogService();
+        }
+
         public ShopCatalogController(IShopCatalogService shopCatalogService)
         {
             _shopCatalogService = shopCatalogService;
