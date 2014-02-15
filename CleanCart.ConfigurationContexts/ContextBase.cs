@@ -1,4 +1,5 @@
 ﻿using CleanCart.ConfigurationContexts.Configurations;
+using CleanCart.ConfigurationContexts.Fillers.ShopCatalog;
 
 namespace CleanCart.ConfigurationContexts
 {
@@ -7,6 +8,11 @@ namespace CleanCart.ConfigurationContexts
         protected void UseConfiguration<TConfiguration>() where TConfiguration : IConfiguration, new()
         {
             new TConfiguration().Install();
+        }
+
+        protected void UseFiller<TFiller>() where TFiller : IFiller, new()
+        {
+            new TFiller().Apply();
         }
     }
 }

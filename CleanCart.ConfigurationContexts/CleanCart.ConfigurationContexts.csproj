@@ -43,6 +43,8 @@
     <Compile Include="DemoInMemoryContext.cs" />
     <Compile Include="Configurations\IConfiguration.cs" />
     <Compile Include="Configurations\Persistence\InMemoryPersistenceConfiguration.cs" />
+    <Compile Include="Fillers\ShopCatalog\IFiller.cs" />
+    <Compile Include="Fillers\ShopCatalog\InMemoryShopCatalogFiller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

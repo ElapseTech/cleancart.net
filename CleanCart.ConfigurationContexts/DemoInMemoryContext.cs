@@ -1,4 +1,5 @@
 ﻿using CleanCart.ConfigurationContexts.Configurations.Persistence;
+using CleanCart.ConfigurationContexts.Fillers.ShopCatalog;
 
 namespace CleanCart.ConfigurationContexts
 {
@@ -7,6 +8,8 @@ namespace CleanCart.ConfigurationContexts
         public void Apply()
         {
             UseConfiguration<InMemoryPersistenceConfiguration>();
+            
+            UseFiller<InMemoryShopCatalogFiller>();
         }
     }
 }
