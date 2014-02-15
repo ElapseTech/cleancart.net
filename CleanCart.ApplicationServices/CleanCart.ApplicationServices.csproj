@@ -42,6 +42,9 @@
     <Compile Include="Assemblers\CatalogItemAssembler.cs" />
     <Compile Include="Dto\CatalogItemDTO.cs" />
     <Compile Include="IShopCatalogService.cs" />
+    <Compile Include="Locator\CannotRegisterServiceTwiceException.cs" />
+    <Compile Include="Locator\ServiceLocator.cs" />
+    <Compile Include="Locator\ServiceNotRegisteredException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShopCatalogService.cs" />
   </ItemGroup>
