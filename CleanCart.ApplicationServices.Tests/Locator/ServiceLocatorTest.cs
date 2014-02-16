@@ -50,12 +50,12 @@ namespace CleanCart.ApplicationServices.Tests.Locator
         }
 
         [TestMethod]
-        public void NonRegisteredWhenCheckIfDefinedShouldNot()
+        public void UnregisteredServiceShouldNotBeDefined()
         {
             _locator.IsServiceDefined(typeof(ITestService)).Should().BeFalse();
         }
 
-        
+
     }
 
     internal interface ITestService
