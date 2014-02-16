@@ -8,7 +8,7 @@ namespace CleanCart.ConfigurationContexts.Configurations.Persistence
     {
         public void Install()
         {
-            ServiceLocator.Register<ICatalogItemRepository>(new InMemoryCatalogItemRepository());
+            ServiceLocator.Locator.Register<ICatalogItemRepository>(new InMemoryCatalogItemRepository());
         }
     }
 }

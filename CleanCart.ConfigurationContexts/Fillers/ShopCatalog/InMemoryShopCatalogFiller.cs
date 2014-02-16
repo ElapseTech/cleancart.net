@@ -11,7 +11,7 @@ namespace CleanCart.ConfigurationContexts.Fillers.ShopCatalog
 
         public InMemoryShopCatalogFiller()
         {
-            _catalogItemRepository = ServiceLocator.Resolve<ICatalogItemRepository>();
+            _catalogItemRepository = ServiceLocator.Locator.Resolve<ICatalogItemRepository>();
         }
 
         public void Apply()

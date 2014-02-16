@@ -1,45 +1,61 @@
 ﻿
+using System.Runtime.InteropServices;
 using CleanCart.ApplicationServices.Locator;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace CleanCart.ApplicationServices.Tests.Locator
 {
     [TestClass]
     class ServiceLocatorTest
     {
+        private TestImplementation _theImplementation;
+        private ServiceLocator _locator;
 
         [TestInitialize]
         public void ResetServiceLocator()
         {
-            ServiceLocator.Reset();
+            _theImplementation = new TestImplementation();
+            _locator = new ServiceLocator();
         }
 
-        [TestMethod, ExpectedException(typeof(ServiceNotRegisteredException))]
-        public void ResolvingAServiceThatIsNotRegisteredThrowsAnException()
+
+
+        [TestMethod]
+        public void CanResolveARegisteredComponent()
         {
-            ServiceLocator.Resolve<ITestService>();
+            _locator.Register<ITestService>(_theImplementation);
+            _locator.Resolve<ITestService>().Should().Be(_theImplementation);
         }
 
         [TestMethod, ExpectedException(typeof(CannotRegisterServiceTwiceException))]
         public void CannotRegisterSameServiceTwice()
         {
-            var firstImplementation = new TestImplementation();
-            var secondImplementation = new TestImplementation();
+            _locator.Register<ITestService>(_theImplementation);
+            _locator.Register<ITestService>(_theImplementation);
+        }
 
-            ServiceLocator.Register<ITestService>(firstImplementation);
-            ServiceLocator.Register<ITestService>(secondImplementation);
+        [TestMethod, ExpectedException(typeof(ServiceNotRegisteredException))]
+        public void ResolvingAServiceThatIsNotRegisteredThrowsAnException()
+        {
+            _locator.Resolve<ITestService>();
         }
 
         [TestMethod]
-        public void CanResolveARegisteredComponent()
+        public void CanCheckIfAServiceIsRegistered()
         {
-            var implementation = new TestImplementation();
-
-            ServiceLocator.Register<ITestService>(implementation);
-
-            ServiceLocator.Resolve<ITestService>().Should().Be(implementation);
+            _locator.Register<ITestService>(_theImplementation);
+            _locator.IsServiceDefined(typeof(ITestService)).Should().BeTrue();
         }
+
+        [TestMethod]
+        public void NonRegisteredWhenCheckIfDefinedShouldNot()
+        {
+            _locator.IsServiceDefined(typeof(ITestService)).Should().BeFalse();
+        }
+
+        
     }
 
     internal interface ITestService

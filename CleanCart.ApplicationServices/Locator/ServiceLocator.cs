@@ -6,36 +6,60 @@ namespace CleanCart.ApplicationServices.Locator
 {
     public class ServiceLocator
     {
-        private static readonly IDictionary<Type, dynamic> Implementations = new Dictionary<Type, dynamic>(); 
+        private static volatile ServiceLocator _locator = null;
+        private static readonly object SyncRoot = new object();
 
-        public static void Register<TService>(TService implementation) where TService : class
+        private readonly IDictionary<Type, dynamic> _implementations = new Dictionary<Type, dynamic>();
+
+        public void Register<TService>(TService implementation) where TService : class
         {
-            var serviceType = typeof (TService);
-            if (ServiceIsDefined(serviceType))
+            var serviceType = typeof(TService);
+            if (IsServiceDefined(serviceType))
             {
                 throw new CannotRegisterServiceTwiceException(serviceType);
             }
-            Implementations.Add(serviceType, implementation);
+            _implementations.Add(serviceType, implementation);
         }
 
-        public static TService Resolve<TService>() where TService : class
+        public TService Resolve<TService>() where TService : class
         {
-            var serviceType = typeof (TService);
-            if (!ServiceIsDefined(serviceType))
+            var serviceType = typeof(TService);
+            if (!IsServiceDefined(serviceType))
             {
                 throw new ServiceNotRegisteredException(serviceType);
             }
-            return Implementations[typeof(TService)] as TService;
+            return _implementations[typeof(TService)] as TService;
         }
 
-        private static bool ServiceIsDefined(Type serviceType) 
+        public bool IsServiceDefined(Type serviceType)
         {
-            return Implementations.ContainsKey(serviceType);
+            return _implementations.ContainsKey(serviceType);
         }
 
-        public static void Reset()
+
+        public static ServiceLocator Locator
         {
-            Implementations.Clear();
+            get
+            {
+                if (_locator == null)
+                {
+                    lock (SyncRoot)
+                    {
+                        _locator = new ServiceLocator();
+                    }
+                }
+                return _locator;
+            }
+
+            set
+            {
+                lock (SyncRoot)
+                {
+                    _locator = value;
+                }
+            }
         }
+
+
     }
 }

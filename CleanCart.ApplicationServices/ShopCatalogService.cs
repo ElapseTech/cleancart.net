@@ -13,7 +13,7 @@ namespace CleanCart.ApplicationServices
 
         public ShopCatalogService()
         {
-            _catalogItemRepository = ServiceLocator.Resolve<ICatalogItemRepository>();
+            _catalogItemRepository = ServiceLocator.Locator.Resolve<ICatalogItemRepository>();
             _catalogItemAssembler = new CatalogItemAssembler();
         }
 
