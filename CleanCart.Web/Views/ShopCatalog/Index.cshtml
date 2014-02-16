@@ -1,0 +1,10 @@
+﻿@model CleanCart.ViewModels.ShopCatalog.ShopCatalogViewModel
+
+<h2>CleanCart Catalog</h2>
+
+<ul>
+    @foreach (var item in Model.CatalogItems)
+    {
+        <li>@item.Title</li>
+    }
+</ul>

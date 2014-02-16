@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using CleanCart.ConfigurationContexts;
 
 namespace CleanCart
 {
@@ -15,6 +16,8 @@ namespace CleanCart
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            new DemoInMemoryContext().Apply();
         }
     }
 }

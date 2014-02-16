@@ -35,8 +35,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\packages\FluentAssertions.2.2.0.0\lib\net45\FluentAssertions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1312.1622\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -99,6 +105,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ShopCatalogControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +115,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CleanCart.ApplicationServices\CleanCart.ApplicationServices.csproj">
+      <Project>{E1C9273C-EAB0-4750-BB72-A9D0AB59063A}</Project>
+      <Name>CleanCart.ApplicationServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CleanCart.Domain\CleanCart.Domain.csproj">
+      <Project>{44aaa77a-bddf-4ae5-9509-a08a9ef1fb5b}</Project>
+      <Name>CleanCart.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CleanCart.Web\CleanCart.Web.csproj">
       <Project>{2A8359C3-C775-4A77-8E9F-26FECD679908}</Project>
       <Name>CleanCart.Web</Name>

@@ -122,10 +122,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ShopCatalogController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ShopCatalog\ShopCatalogViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -150,11 +152,10 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\ShopCatalog\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -164,10 +165,17 @@
       <Project>{e1c9273c-eab0-4750-bb72-a9d0ab59063a}</Project>
       <Name>CleanCart.ApplicationServices</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CleanCart.ConfigurationContexts\CleanCart.ConfigurationContexts.csproj">
+      <Project>{aa420445-f20e-4496-96cc-3e7ffd0f9c61}</Project>
+      <Name>CleanCart.ConfigurationContexts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CleanCart.Domain\CleanCart.Domain.csproj">
       <Project>{44aaa77a-bddf-4ae5-9509-a08a9ef1fb5b}</Project>
       <Name>CleanCart.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

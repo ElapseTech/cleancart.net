@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E1C9273C-EAB0-4750-BB72-A9D0AB59063A}</ProjectGuid>
+    <ProjectGuid>{AA420445-F20E-4496-96CC-3E7FFD0F9C61}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CleanCart.ApplicationServices</RootNamespace>
-    <AssemblyName>CleanCart.ApplicationServices</AssemblyName>
+    <RootNamespace>CleanCart.ConfigurationContexts</RootNamespace>
+    <AssemblyName>CleanCart.ConfigurationContexts</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,19 +39,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assemblers\CatalogItemAssembler.cs" />
-    <Compile Include="Dto\CatalogItemDTO.cs" />
-    <Compile Include="IShopCatalogService.cs" />
-    <Compile Include="Locator\CannotRegisterServiceTwiceException.cs" />
-    <Compile Include="Locator\ServiceLocator.cs" />
-    <Compile Include="Locator\ServiceNotRegisteredException.cs" />
+    <Compile Include="ContextBase.cs" />
+    <Compile Include="DemoInMemoryContext.cs" />
+    <Compile Include="Configurations\IConfiguration.cs" />
+    <Compile Include="Configurations\Persistence\InMemoryPersistenceConfiguration.cs" />
+    <Compile Include="Fillers\ShopCatalog\IFiller.cs" />
+    <Compile Include="Fillers\ShopCatalog\InMemoryShopCatalogFiller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShopCatalogService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CleanCart.ApplicationServices\CleanCart.ApplicationServices.csproj">
+      <Project>{e1c9273c-eab0-4750-bb72-a9d0ab59063a}</Project>
+      <Name>CleanCart.ApplicationServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CleanCart.Domain\CleanCart.Domain.csproj">
       <Project>{44aaa77a-bddf-4ae5-9509-a08a9ef1fb5b}</Project>
       <Name>CleanCart.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CleanCart.Persistence.FakeInMemory\CleanCart.Persistence.FakeInMemory.csproj">
+      <Project>{e1726cb5-79f7-4214-be80-240f8d42e2a4}</Project>
+      <Name>CleanCart.Persistence.FakeInMemory</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
