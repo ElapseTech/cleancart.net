@@ -2,7 +2,7 @@
 
 namespace CleanCart.Persistence.FakeInMemory.Entities
 {
-    public class InMemoryCatalogItem : CatalogItem
+    public sealed class InMemoryCatalogItem : CatalogItem
     {
         public InMemoryCatalogItem(string title)
         {
