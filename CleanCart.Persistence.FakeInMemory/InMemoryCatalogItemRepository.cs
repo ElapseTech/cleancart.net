@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CleanCart.Domain;
 
 namespace CleanCart.Persistence.FakeInMemory

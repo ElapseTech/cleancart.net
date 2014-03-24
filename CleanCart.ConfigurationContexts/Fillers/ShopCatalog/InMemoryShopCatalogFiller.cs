@@ -1,5 +1,4 @@
-﻿
-using CleanCart.ApplicationServices.Locator;
+﻿using CleanCart.ApplicationServices.Locator;
 using CleanCart.Domain;
 using CleanCart.Persistence.FakeInMemory.Entities;
 
