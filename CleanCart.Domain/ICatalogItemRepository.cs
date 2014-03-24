@@ -6,5 +6,6 @@ namespace CleanCart.Domain
     {
         void Persist(CatalogItem catalogItem);
         IList<CatalogItem> FindAll();
+        CatalogItem FindByItemCode(ItemCode itemCode);
     }
 }
