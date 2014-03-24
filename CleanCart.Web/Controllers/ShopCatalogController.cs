@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using CleanCart.ApplicationServices;
+﻿using CleanCart.ApplicationServices;
 using CleanCart.ViewModels.ShopCatalog;
+using System.Web.Mvc;
 
 namespace CleanCart.Controllers
 {

@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
-using CleanCart.ApplicationServices;
-using CleanCart.ApplicationServices.Assemblers;
+﻿using CleanCart.ApplicationServices;
 using CleanCart.ApplicationServices.Dto;
 using CleanCart.Controllers;
 using CleanCart.ViewModels.ShopCatalog;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Collections.Generic;
 
 namespace CleanCart.Tests.Controllers
 {

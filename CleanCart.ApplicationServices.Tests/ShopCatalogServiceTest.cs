@@ -1,5 +1,4 @@
-﻿
-using CleanCart.ApplicationServices.Assemblers;
+﻿using CleanCart.ApplicationServices.Assemblers;
 using CleanCart.ApplicationServices.Dto;
 using CleanCart.Domain;
 using FluentAssertions;
@@ -28,7 +27,7 @@ namespace CleanCart.ApplicationServices.Tests
 
         private void SetupCatalogItemRespositoriesWithSomeItems()
         {
-            _catalogItems = new List<CatalogItem>() { };
+            _catalogItems = new List<CatalogItem>();
 
             _catalogItemRepository = new Mock<ICatalogItemRepository>();
             _catalogItemRepository.Setup(x => x.FindAll()).Returns(_catalogItems);

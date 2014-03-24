@@ -1,5 +1,4 @@
-﻿
-using CleanCart.ApplicationServices.Assemblers;
+﻿using CleanCart.ApplicationServices.Assemblers;
 using CleanCart.Domain;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
