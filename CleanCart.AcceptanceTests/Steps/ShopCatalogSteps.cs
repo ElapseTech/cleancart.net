@@ -17,7 +17,9 @@ namespace CleanCart.AcceptanceTests.Steps
     [Binding]
     class ShopCatalogSteps
     {
-        private readonly String[] _titles = {"ITEM 1", "item 2"};
+        private const string NoTitle = "";
+        private const string NoCode = "";
+        private readonly String[] _titles = { "ITEM 1", "item 2" };
 
         private readonly Fixture _fixture = new Fixture();
 
@@ -35,10 +37,24 @@ namespace CleanCart.AcceptanceTests.Steps
         [Given(@"Some items in the catalog")]
         public void GivenSomeItemsInTheCatalog()
         {
-            _catalogItemRepository.Persist(new InMemoryCatalogItem(new ItemCode("I1"), _titles[0]));
-            _catalogItemRepository.Persist(new InMemoryCatalogItem(new ItemCode("I2"), _titles[1]));
+            PersistANewItemToCatalog(new ItemCode("I1"), _titles[0]);
+            PersistANewItemToCatalog(new ItemCode("I2"), _titles[1]);
         }
-        
+
+        [Given(@"an item with code '(.*)' in the catalog")]
+        public void GivenAnItemWithCodeInTheCatalog(string itemCode)
+        {
+            var itemTitle = CreateItemTitle();
+            PersistANewItemToCatalog(new ItemCode(itemCode), itemTitle);
+        }
+
+        [Given(@"an item with code '(.*)' and the title '(.*)' in the catalog")]
+        public void GivenAnItemWithCodeAndTitleInTheCatalog(string itemCode, string itemTitle)
+        {
+            PersistANewItemToCatalog(new ItemCode(itemCode), itemTitle);
+        }
+
+
         [When(@"I visit the catalog")]
         public void WhenIVisitTheCatalog()
         {
@@ -50,21 +66,52 @@ namespace CleanCart.AcceptanceTests.Steps
         [When(@"I add a new item")]
         public void WhenIAddANewItem()
         {
-            var itemTitle = _fixture.Create<String>();
-            WhenIAddANewItemWithTheTitle(itemTitle);
+            var itemCode = CreateItemCode();
+            var itemTitle = CreateItemTitle();
+            WhenIAddANewItemWithTheCodeAndTheTitle(itemCode, itemTitle);
         }
 
-        [When(@"I add a new item with the title '(.*)'")]
-        public void WhenIAddANewItemWithTheTitle(string itemTitle)
+        [When(@"I add a new item with no title")]
+        public void WhenIAddANewItemWithNoTitle()
+        {
+            var itemCode = CreateItemCode();
+            WhenIAddANewItemWithTheCodeAndTheTitle(itemCode, NoTitle);
+        }
+
+        [When(@"I add a new item with no item code")]
+        public void WhenIAddANewItemWithNoItemCode()
+        {
+            var itemTitle = CreateItemTitle();
+            WhenIAddANewItemWithTheCodeAndTheTitle(NoCode, itemTitle);
+        }
+
+        [When(@"I add a new item with the code '(.*)'")]
+        public void WhenIAddANewItemWithTheCode(string itemCode)
+        {
+            var itemTitle = CreateItemTitle();
+            WhenIAddANewItemWithTheCodeAndTheTitle(itemCode, itemTitle);
+        }
+
+        [When(@"I add a new item with the code '(.*)' and the title '(.*)'")]
+        public void WhenIAddANewItemWithTheCodeAndTheTitle(string itemCode, string itemTitle)
         {
             ScenarioContext.Current.Pending();
         }
+
+
 
         [Then(@"all items' title are shown")]
         public void ThenAllItemsTitleAreShown()
         {
             var shopCatalogViewModel = _shopCatalogViewResult.Model as ShopCatalogViewModel;
             shopCatalogViewModel.CatalogItems.Select(x => x.Title).Should().BeEquivalentTo(_titles);
+        }
+
+
+        [Then(@"an error is reported")]
+        public void ThenAnErrorIsReported()
+        {
+            ScenarioContext.Current.Pending();
         }
 
 
@@ -80,6 +127,25 @@ namespace CleanCart.AcceptanceTests.Steps
         {
             ScenarioContext.Current.Pending();
         }
+
+
+
+        private string CreateItemCode()
+        {
+            return _fixture.Create<String>("Code");
+        }
+
+        private string CreateItemTitle()
+        {
+            return _fixture.Create<String>("Title");
+        }
+
+        private void PersistANewItemToCatalog(ItemCode itemCode, string itemTitle)
+        {
+            var item = new InMemoryCatalogItem(itemCode, itemTitle);
+            _catalogItemRepository.Persist(item);
+        }
+
 
     }
 }
