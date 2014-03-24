@@ -1,14 +1,14 @@
-﻿using System;
-
-namespace CleanCart.ApplicationServices.Dto
+﻿namespace CleanCart.ApplicationServices.Dto
 {
     public sealed class CatalogItemDTO
     {
-        public CatalogItemDTO(string title)
+        public CatalogItemDTO(string codeText, string title)
         {
             Title = title;
+            CodeText = codeText;
         }
 
-        public String Title { get; private set; }
+        public string Title { get; private set; }
+        public string CodeText { get; private set; }
     }
 }

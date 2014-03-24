@@ -53,5 +53,17 @@ namespace CleanCart.ApplicationServices.Tests
             var itemsDTOReturned = _shopCatalogService.ListCatalogItems();
             itemsDTOReturned.Should().BeEquivalentTo(_itemsDTOs);
         }
+
+        [TestMethod]
+        public void CanAddAnItemFromDTO()
+        {
+            var item = new Mock<CatalogItem>();
+            var itemDTO = new CatalogItemDTO("I1", "A title");
+            _assembler.Setup(x => x.FromDTO(itemDTO)).Returns(item.Object);
+
+            _shopCatalogService.AddCatalogItem(itemDTO);
+
+            _catalogItemRepository.Verify(x => x.Persist(item.Object));
+        }
     }
 }

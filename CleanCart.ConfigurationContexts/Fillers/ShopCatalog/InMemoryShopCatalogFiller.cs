@@ -15,10 +15,10 @@ namespace CleanCart.ConfigurationContexts.Fillers.ShopCatalog
 
         public void Apply()
         {
-            _catalogItemRepository.Persist(new InMemoryCatalogItem(new ItemCode("I1"), "Item #1"));
-            _catalogItemRepository.Persist(new InMemoryCatalogItem(new ItemCode("I2"), "Item #2"));
-            _catalogItemRepository.Persist(new InMemoryCatalogItem(new ItemCode("I3"), "Item #3"));
-            _catalogItemRepository.Persist(new InMemoryCatalogItem(new ItemCode("I4"), "Item #4"));
+            _catalogItemRepository.Persist(new InMemoryCatalogItem(new CatalogItemCode("I1"), "Item #1"));
+            _catalogItemRepository.Persist(new InMemoryCatalogItem(new CatalogItemCode("I2"), "Item #2"));
+            _catalogItemRepository.Persist(new InMemoryCatalogItem(new CatalogItemCode("I3"), "Item #3"));
+            _catalogItemRepository.Persist(new InMemoryCatalogItem(new CatalogItemCode("I4"), "Item #4"));
         }
     }
 }

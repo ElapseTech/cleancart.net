@@ -6,5 +6,7 @@ namespace CleanCart.ApplicationServices
     public interface IShopCatalogService
     {
         IEnumerable<CatalogItemDTO> ListCatalogItems();
+
+        void AddCatalogItem(CatalogItemDTO catalogItemDTO);
     }
 }

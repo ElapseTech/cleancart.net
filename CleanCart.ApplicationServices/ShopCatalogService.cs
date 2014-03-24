@@ -29,5 +29,11 @@ namespace CleanCart.ApplicationServices
             var catalogItemDtos = _catalogItemAssembler.ToDtoList(catalogItems);
             return catalogItemDtos;
         }
+
+        public void AddCatalogItem(CatalogItemDTO catalogItemDTO)
+        {
+            var catalogItem = _catalogItemAssembler.FromDTO(catalogItemDTO);
+            _catalogItemRepository.Persist(catalogItem);
+        }
     }
 }

@@ -4,9 +4,9 @@ using CleanCart.Domain;
 
 namespace CleanCart.Persistence.FakeInMemory
 {
-    public class InMemoryCatalogItemRepository  : ICatalogItemRepository
+    public class InMemoryCatalogItemRepository : ICatalogItemRepository
     {
-        private readonly IList<CatalogItem> _items = new List<CatalogItem>();  
+        private readonly IList<CatalogItem> _items = new List<CatalogItem>();
 
         public void Persist(CatalogItem catalogItem)
         {
@@ -18,9 +18,9 @@ namespace CleanCart.Persistence.FakeInMemory
             return _items;
         }
 
-        public CatalogItem FindByItemCode(ItemCode itemCode)
+        public CatalogItem FindByItemCode(CatalogItemCode catalogItemCode)
         {
-            CatalogItem item = _items.FirstOrDefault(x => x.Code == itemCode);
+            CatalogItem item = _items.FirstOrDefault(x => x.Code == catalogItemCode);
             if (item == null)
             {
                 throw new CatalogItemNotFoundException();

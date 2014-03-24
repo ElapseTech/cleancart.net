@@ -26,7 +26,7 @@ namespace CleanCart.AcceptanceTests.Steps
         private InMemoryCatalogItemRepository _catalogItemRepository;
         private readonly CatalogItemAssembler _catalogItemAssembler = new CatalogItemAssembler();
         private ViewResult _shopCatalogViewResult;
-        private ItemCode _lastAddedItemCode;
+        private CatalogItemCode _lastAddedCatalogItemCode;
 
         [Given(@"A shop catalog")]
         public void GivenAShopACatalog()
@@ -37,21 +37,21 @@ namespace CleanCart.AcceptanceTests.Steps
         [Given(@"Some items in the catalog")]
         public void GivenSomeItemsInTheCatalog()
         {
-            PersistANewItemToCatalog(new ItemCode("I1"), _titles[0]);
-            PersistANewItemToCatalog(new ItemCode("I2"), _titles[1]);
+            PersistANewItemToCatalog(new CatalogItemCode("I1"), _titles[0]);
+            PersistANewItemToCatalog(new CatalogItemCode("I2"), _titles[1]);
         }
 
         [Given(@"an item with code '(.*)' in the catalog")]
         public void GivenAnItemWithCodeInTheCatalog(string itemCode)
         {
             var itemTitle = CreateItemTitle();
-            PersistANewItemToCatalog(new ItemCode(itemCode), itemTitle);
+            PersistANewItemToCatalog(new CatalogItemCode(itemCode), itemTitle);
         }
 
         [Given(@"an item with code '(.*)' and the title '(.*)' in the catalog")]
         public void GivenAnItemWithCodeAndTitleInTheCatalog(string itemCode, string itemTitle)
         {
-            PersistANewItemToCatalog(new ItemCode(itemCode), itemTitle);
+            PersistANewItemToCatalog(new CatalogItemCode(itemCode), itemTitle);
         }
 
 
@@ -118,7 +118,7 @@ namespace CleanCart.AcceptanceTests.Steps
         [Then(@"the item is added to the catalog")]
         public void ThenTheItemIsAddedToTheCatalog()
         {
-            _catalogItemRepository.FindByItemCode(_lastAddedItemCode);
+            _catalogItemRepository.FindByItemCode(_lastAddedCatalogItemCode);
         }
 
 
@@ -140,9 +140,9 @@ namespace CleanCart.AcceptanceTests.Steps
             return _fixture.Create<String>("Title");
         }
 
-        private void PersistANewItemToCatalog(ItemCode itemCode, string itemTitle)
+        private void PersistANewItemToCatalog(CatalogItemCode catalogItemCode, string itemTitle)
         {
-            var item = new InMemoryCatalogItem(itemCode, itemTitle);
+            var item = new InMemoryCatalogItem(catalogItemCode, itemTitle);
             _catalogItemRepository.Persist(item);
         }
 

@@ -1,4 +1,5 @@
 ﻿using CleanCart.ApplicationServices.Assemblers;
+using CleanCart.ApplicationServices.Dto;
 using CleanCart.Domain;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,43 +12,80 @@ namespace CleanCart.ApplicationServices.Tests.Assemblers
     [TestClass]
     public class CatalogItemAssemblerTest
     {
-        const string TheTitle = "Title";
+        private const string EggTitle = "The Better Egg";
+        private const string EggCodeText = "THE_CODE";
+        private readonly CatalogItemCode _eggCode = new CatalogItemCode(EggCodeText);
+
+        private const string SomeTitle = "Title";
         const string FirstTitle = "FIRST TITLE";
         const string SecondTitle = "SECOND TITLE";
 
-        private CatalogItemAssembler _assembler;
+        private Mock<ICatalogItemFactory> _itemFactory;
+
+        private CatalogItemAssembler _itemAssembler;
 
         [TestInitialize]
         public void SetupAssembler()
         {
-            _assembler = new CatalogItemAssembler();
+            _itemFactory = new Mock<ICatalogItemFactory>();
+            _itemAssembler = new CatalogItemAssembler(_itemFactory.Object);
         }
 
         [TestMethod]
         public void ToDTOShouldMapTheTitle()
         {
-            var catalogItem = CreateCatalogItem(TheTitle);
-            var dto = _assembler.ToDto(catalogItem.Object);
-            dto.Title.Should().Be(TheTitle);
+            var catalogItem = CreateCatalogItemMock(_eggCode, EggTitle);
+            var dto = _itemAssembler.ToDto(catalogItem.Object);
+            dto.Title.Should().Be(EggTitle);
         }
 
         [TestMethod]
-        public void ToDTOListShouldMapAttributesForAllItemsInSameOrder()
+        public void ToDTOShouldMapTheCode()
         {
-            var catalogItems = new List<CatalogItem> {CreateCatalogItem(FirstTitle).Object, 
-                                                      CreateCatalogItem(SecondTitle).Object};
+            var catalogItem = CreateCatalogItemMock(_eggCode, SomeTitle);
 
-            var dtos = _assembler.ToDtoList(catalogItems);
+            var dto = _itemAssembler.ToDto(catalogItem.Object);
+
+            var dtoCode = new CatalogItemCode(dto.CodeText);
+            dtoCode.Should().Be(_eggCode);
+        }
+
+        [TestMethod]
+        public void ToDTOListShouldMapForAllItemsInSameOrder()
+        {
+            var catalogItems = new List<CatalogItem> {CreateCatalogItemMock(FirstTitle).Object, 
+                                                      CreateCatalogItemMock(SecondTitle).Object};
+
+            var dtos = _itemAssembler.ToDtoList(catalogItems);
 
             dtos.ElementAt(0).Title.Should().Be(FirstTitle);
             dtos.ElementAt(1).Title.Should().Be(SecondTitle);
             dtos.Should().HaveCount(catalogItems.Count);
         }
 
-        private Mock<CatalogItem> CreateCatalogItem(string title)
+        [TestMethod]
+        public void FromDTOShouldCreateTheItemWithAllAttributesUsingTheFactory()
+        {
+            var itemDTO = new CatalogItemDTO(EggCodeText, EggTitle);
+            var egg = CreateCatalogItemMock(_eggCode, EggTitle);
+            _itemFactory.Setup(x => x.CreateCatalogItem(_eggCode, EggTitle)).Returns(egg.Object);
+
+            var itemReturned = _itemAssembler.FromDTO(itemDTO);
+
+            Assert.AreEqual(egg.Object, itemReturned);
+        }
+
+        private Mock<CatalogItem> CreateCatalogItemMock(string title)
+        {
+            var code = new CatalogItemCode(EggCodeText);
+            return CreateCatalogItemMock(code, title);
+        }
+
+        private Mock<CatalogItem> CreateCatalogItemMock(CatalogItemCode code, string title)
         {
             var item = new Mock<CatalogItem>();
             item.Setup(x => x.Title).Returns(title);
+            item.Setup(x => x.Code).Returns(code);
             return item;
         }
     }
