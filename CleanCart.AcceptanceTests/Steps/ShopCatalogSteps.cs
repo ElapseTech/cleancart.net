@@ -21,7 +21,7 @@ namespace CleanCart.AcceptanceTests.Steps
         private readonly CatalogItemAssembler _catalogItemAssembler = new CatalogItemAssembler();
         private ViewResult _shopCatalogViewResult;
 
-        [Given(@"A shop a catalog")]
+        [Given(@"A shop catalog")]
         public void GivenAShopACatalog()
         {
             _catalogItemRepository = new InMemoryCatalogItemRepository();
