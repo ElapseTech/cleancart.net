@@ -2,6 +2,7 @@ using System;
 
 namespace CleanCart.ApplicationServices.Locator
 {
+    [Serializable]
     public class ServiceNotRegisteredException : Exception
     {
         public ServiceNotRegisteredException(Type servicetype) : 
