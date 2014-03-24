@@ -6,7 +6,7 @@ namespace CleanCart.ApplicationServices.Locator
 {
     public class ServiceLocator
     {
-        private static volatile ServiceLocator _locator = null;
+        private static volatile ServiceLocator _locator;
         private static readonly object SyncRoot = new object();
 
         private readonly IDictionary<Type, dynamic> _implementations = new Dictionary<Type, dynamic>();
@@ -41,22 +41,14 @@ namespace CleanCart.ApplicationServices.Locator
         {
             get
             {
-                if (_locator == null)
+                lock (SyncRoot)
                 {
-                    lock (SyncRoot)
+                    if (_locator == null)
                     {
                         _locator = new ServiceLocator();
                     }
                 }
                 return _locator;
-            }
-
-            set
-            {
-                lock (SyncRoot)
-                {
-                    _locator = value;
-                }
             }
         }
 
