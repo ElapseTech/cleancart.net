@@ -8,6 +8,8 @@ namespace CleanCart
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        private DemoInMemoryContext _context;
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -17,7 +19,18 @@ namespace CleanCart
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            new DemoInMemoryContext().Apply();
+            _context = new DemoInMemoryContext();
+            _context.Apply();
+        }
+
+        protected void Application_BeginRequest()
+        {
+            _context.BeforeRequest();
+        }
+
+        protected void Application_EndRequest()
+        {
+            _context.AfterRequest();
         }
     }
 }

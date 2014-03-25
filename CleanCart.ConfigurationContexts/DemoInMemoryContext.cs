@@ -9,7 +9,7 @@ namespace CleanCart.ConfigurationContexts
         {
             UseConfiguration<InMemoryPersistenceConfiguration>();
             
-            UseFiller<InMemoryShopCatalogFiller>();
+            UseFiller<ShopCatalogFiller>();
         }
     }
 }

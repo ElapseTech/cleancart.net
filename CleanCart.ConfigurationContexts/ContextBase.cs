@@ -10,9 +10,22 @@ namespace CleanCart.ConfigurationContexts
             new TConfiguration().Install();
         }
 
+        protected void UseConfiguration<TConfiguration>(TConfiguration configuration) where TConfiguration : IConfiguration
+        {
+             configuration.Install();
+        }
+
         protected void UseFiller<TFiller>() where TFiller : IFiller, new()
         {
             new TFiller().Apply();
+        }
+
+        public virtual void BeforeRequest() 
+        {
+        }
+
+        public virtual void AfterRequest() 
+        {
         }
     }
 }

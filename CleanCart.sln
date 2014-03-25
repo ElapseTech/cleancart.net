@@ -26,6 +26,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCart.Persistence.FakeI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCart.ConfigurationContexts", "CleanCart.ConfigurationContexts\CleanCart.ConfigurationContexts.csproj", "{AA420445-F20E-4496-96CC-3E7FFD0F9C61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCart.Persistence.EntityFramework", "CleanCart.Persistence.EntityFramework\CleanCart.Persistence.EntityFramework.csproj", "{4399DCDC-E463-42B0-A28D-5EF87C76675E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCart.Persistence.EntityFramework.IntegrationTests", "CleanCart.Persistence.EntityFramework.IntegrationTests\CleanCart.Persistence.EntityFramework.IntegrationTests.csproj", "{CDB0B0CA-7762-4ABA-B3F0-3B29ECD05171}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +72,14 @@ Global
 		{AA420445-F20E-4496-96CC-3E7FFD0F9C61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA420445-F20E-4496-96CC-3E7FFD0F9C61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA420445-F20E-4496-96CC-3E7FFD0F9C61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4399DCDC-E463-42B0-A28D-5EF87C76675E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4399DCDC-E463-42B0-A28D-5EF87C76675E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4399DCDC-E463-42B0-A28D-5EF87C76675E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4399DCDC-E463-42B0-A28D-5EF87C76675E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDB0B0CA-7762-4ABA-B3F0-3B29ECD05171}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDB0B0CA-7762-4ABA-B3F0-3B29ECD05171}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDB0B0CA-7762-4ABA-B3F0-3B29ECD05171}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDB0B0CA-7762-4ABA-B3F0-3B29ECD05171}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
