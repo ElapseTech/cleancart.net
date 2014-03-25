@@ -6,5 +6,5 @@
 Scenario: All items are present in the shop catalog
 	Given A shop catalog
 	And Some items in the catalog
-	When I visit the catalog
+	When I request the catalog
 	Then all items' title are present

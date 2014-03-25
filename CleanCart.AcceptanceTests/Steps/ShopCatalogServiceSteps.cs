@@ -60,8 +60,8 @@ namespace CleanCart.AcceptanceTests.Steps
         }
 
 
-        [When(@"I visit the catalog")]
-        public void WhenIVisitTheCatalog()
+        [When(@"I request the catalog")]
+        public void WhenIRequestTheCatalog()
         {
             var shopCatalogService = new ShopCatalogService(_catalogItemRepository, _catalogItemFactory, _catalogItemAssembler);
             var shopCatalogController = new ShopCatalogController(shopCatalogService);

@@ -82,7 +82,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 8
  testRunner.And("Some items in the catalog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 9
- testRunner.When("I visit the catalog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I request the catalog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 10
  testRunner.Then("all items\' title are present", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
