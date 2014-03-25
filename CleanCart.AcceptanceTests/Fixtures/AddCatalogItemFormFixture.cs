@@ -8,7 +8,7 @@ namespace CleanCart.AcceptanceTests.Fixtures
     {
         public void NavigateToForm()
         {
-            Driver.Navigate().GoToUrl(String.Format("http://localhost:{0}/", IISExpressRunner.Port));
+            Driver.Navigate().GoToUrl(CreateAbsoluteUrl());
         }
 
         public void FillInItemCode(string itemCode)

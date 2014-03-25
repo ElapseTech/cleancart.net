@@ -105,7 +105,6 @@
     </Compile>
     <Compile Include="Fixtures\AddCatalogItemFormFixture.cs" />
     <Compile Include="Fixtures\CleanCartWebFixture.cs" />
-    <Compile Include="Helpers\IISExpressRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Features\SH1_DisplayShopCatalog.feature.cs">
       <AutoGen>True</AutoGen>
