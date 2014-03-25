@@ -11,22 +11,28 @@ Scenario: Add an item
 
 @Web
 Scenario: Add multiple items
-	Given The shop catalog page
+	Given The add item catalog form
 	When I add a new item
 	Then I can add another item
 
+@Web
+Scenario: Errors are shown
+	Given The add item catalog form
+	When I an error occurs
+	Then the error is shown
 
 Scenario: A title is mandatory
-	Given The shop catalog site
+	Given A shop catalog
 	When I add a new item with no title
 	Then an error is reported
 
 Scenario: An item code is mandatory
-	Given The shop catalog site
+	Given A shop catalog
 	When I add a new item with no item code
 	Then an error is reported
 
 Scenario: The item code must be unique
-	Given The shop catalog site
+	Given A shop catalog
 	And an item with code 'I1' in the catalog
 	When I add a new item with the code 'I1'
+	Then an error is reported

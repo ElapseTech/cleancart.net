@@ -100,11 +100,31 @@ this.ScenarioSetup(scenarioInfo);
 #line 13
 this.ScenarioSetup(scenarioInfo);
 #line 14
- testRunner.Given("The shop catalog page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("The add item catalog form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 15
  testRunner.When("I add a new item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 16
  testRunner.Then("I can add another item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Errors are shown")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Add items to the shop (SH3)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Web")]
+        public virtual void ErrorsAreShown()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Errors are shown", new string[] {
+                        "Web"});
+#line 19
+this.ScenarioSetup(scenarioInfo);
+#line 20
+ testRunner.Given("The add item catalog form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 21
+ testRunner.When("I an error occurs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 22
+ testRunner.Then("the error is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -115,13 +135,13 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ATitleIsMandatory()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A title is mandatory", ((string[])(null)));
-#line 19
+#line 24
 this.ScenarioSetup(scenarioInfo);
-#line 20
- testRunner.Given("The shop catalog site", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 21
+#line 25
+ testRunner.Given("A shop catalog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 26
  testRunner.When("I add a new item with no title", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 22
+#line 27
  testRunner.Then("an error is reported", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -133,13 +153,13 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void AnItemCodeIsMandatory()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("An item code is mandatory", ((string[])(null)));
-#line 24
+#line 29
 this.ScenarioSetup(scenarioInfo);
-#line 25
- testRunner.Given("The shop catalog site", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 26
+#line 30
+ testRunner.Given("A shop catalog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 31
  testRunner.When("I add a new item with no item code", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 27
+#line 32
  testRunner.Then("an error is reported", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -151,14 +171,16 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TheItemCodeMustBeUnique()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The item code must be unique", ((string[])(null)));
-#line 29
+#line 34
 this.ScenarioSetup(scenarioInfo);
-#line 30
- testRunner.Given("The shop catalog site", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 31
+#line 35
+ testRunner.Given("A shop catalog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 36
  testRunner.And("an item with code \'I1\' in the catalog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 32
+#line 37
  testRunner.When("I add a new item with the code \'I1\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 38
+ testRunner.Then("an error is reported", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

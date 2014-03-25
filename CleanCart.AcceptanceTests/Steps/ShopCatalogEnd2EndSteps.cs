@@ -1,4 +1,5 @@
-﻿using CleanCart.AcceptanceTests.Fixtures;
+﻿using System.Runtime.InteropServices;
+using CleanCart.AcceptanceTests.Fixtures;
 using FluentAssertions;
 using Ploeh.AutoFixture;
 using TechTalk.SpecFlow;
@@ -38,11 +39,20 @@ namespace CleanCart.AcceptanceTests.Steps
             }
         }
 
+
         [Given(@"The shop catalog page")]
         public void GivenTheShopCatalogPage()
         {
             _addShopCatalogFixture = new AddShopCatalogFixture();
         }
+
+        [Given(@"The add item catalog form")]
+        public void GivenTheAddItemCatalogForm()
+        {
+            GivenTheShopCatalogPage();
+        }
+
+
 
         [When(@"I add a new item")]
         public void WhenIAddANewItem()
@@ -53,27 +63,12 @@ namespace CleanCart.AcceptanceTests.Steps
             _lastAddedItemTitle = itemTitle;
         }
 
-        [When(@"I add a new item with no title")]
-        public void WhenIAddANewItemWithNoTitle()
+        [When(@"I an error occurs")]
+        public void WhenIAnErrorOccurs()
         {
-            var itemCode = CreateItemCodeText();
-            FillInCatalogItemFormAndSubmitIt(itemCode, NoTitle);
+            ScenarioContext.Current.Pending();
         }
 
-        [When(@"I add a new item with no item code")]
-        public void WhenIAddANewItemWithNoItemCode()
-        {
-            var itemTitle = CreateItemTitle();
-            FillInCatalogItemFormAndSubmitIt(NoCode, itemTitle);
-        }
-
-        [When(@"I add a new item with the code '(.*)'")]
-        public void WhenIAddANewItemWithTheCode(string itemCode)
-        {
-            var itemTitle = CreateItemTitle();
-            FillInCatalogItemFormAndSubmitIt(itemCode, itemTitle);
-            _lastAddedItemTitle = itemTitle;
-        }
 
 
         [Then(@"the item is shown in the catalog")]
@@ -90,6 +85,12 @@ namespace CleanCart.AcceptanceTests.Steps
             FillInCatalogItemFormAndSubmitIt(itemCode, itemTitle);
 
             AssertCatalogItemWithCodeIsShown(itemTitle);
+        }
+
+        [Then(@"the error is shown")]
+        public void ThenTheErrorIsShown()
+        {
+            ScenarioContext.Current.Pending();
         }
 
 
