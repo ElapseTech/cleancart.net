@@ -11,6 +11,10 @@ namespace CleanCart.ApplicationServices.Tests
     [TestClass]
     class ShopCatalogServiceTest
     {
+        private const string SomeCodeText = "I1";
+        private const string ExistingCodeText = "EXISTING_CODE";
+        private const string SomeTitle = "A title";
+
         private List<CatalogItem> _catalogItems;
         private List<CatalogItemDTO> _itemsDTOs;
         private Mock<ICatalogItemRepository> _catalogItemRepository;
@@ -51,22 +55,38 @@ namespace CleanCart.ApplicationServices.Tests
         }
 
         [TestMethod]
-        public void CanListAllCatalogItemsInDTO()
+        public void ListItemsShouldConvertToDTOs()
         {
             var itemsDTOReturned = _shopCatalogService.ListCatalogItems();
             itemsDTOReturned.Should().BeEquivalentTo(_itemsDTOs);
         }
 
         [TestMethod]
-        public void CanAddAnItemFromDTO()
+        public void AddItemWithDTOShouldPersistTheNewItem()
         {
+            var itemDTO = new CatalogItemDTO(SomeCodeText, SomeTitle);
             var item = new Mock<CatalogItem>();
-            var itemDTO = new CatalogItemDTO("I1", "A title"); //TODO
             _assembler.Setup(x => x.FromDTO(itemDTO, _catalogItemFactory.Object)).Returns(item.Object);
 
             _shopCatalogService.AddCatalogItem(itemDTO);
 
             _catalogItemRepository.Verify(x => x.Persist(item.Object));
         }
+
+        [TestMethod, Ignore]
+        public void AddItemShouldThrowExceptionGivenAlreadyExistingCode()
+        {
+            var itemDTO = new CatalogItemDTO(ExistingCodeText, SomeTitle);
+            var existingCode = new CatalogItemCode(ExistingCodeText);
+            var item = new Mock<CatalogItem>();
+            item.Setup(x => x.Code).Returns(existingCode);
+            _assembler.Setup(x => x.FromDTO(itemDTO, _catalogItemFactory.Object)).Returns(item.Object);
+            _catalogItemRepository.Setup(x => x.FindByItemCode(existingCode)).Returns(item.Object);
+            
+            _shopCatalogService.AddCatalogItem(itemDTO);
+
+        }
+
+
     }
 }
