@@ -1,5 +1,4 @@
 ﻿using System;
-using CleanCart.AcceptanceTests.Helpers;
 using OpenQA.Selenium;
 
 namespace CleanCart.AcceptanceTests.Fixtures
