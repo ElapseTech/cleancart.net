@@ -18,10 +18,8 @@ namespace CleanCart.AcceptanceTests.Steps
     [Binding]
     class ShopCatalogServiceSteps
     {
-        private readonly Fixture _fixture = new Fixture();
+        private readonly Fixture _autoGenerator = new Fixture();
 
-        private const string NoTitle = "";
-        private const string NoCode = "";
         private readonly String[] _titles = { "ITEM 1", "item 2" };
 
         private InMemoryCatalogItemRepository _catalogItemRepository;
@@ -29,8 +27,6 @@ namespace CleanCart.AcceptanceTests.Steps
         private readonly CatalogItemAssembler _catalogItemAssembler = new CatalogItemAssembler();
 
         private ViewResult _shopCatalogViewResult;
-
-        private CatalogItemCode _lastAddedCatalogItemCode;
 
         [Given(@"A shop catalog")]
         public void GivenAShopACatalog()
@@ -90,12 +86,12 @@ namespace CleanCart.AcceptanceTests.Steps
 
         private string CreateItemCode()
         {
-            return _fixture.Create<String>("Code");
+            return _autoGenerator.Create("Code");
         }
 
         private string CreateItemTitle()
         {
-            return _fixture.Create<String>("Title");
+            return _autoGenerator.Create("Title");
         }
     }
 }

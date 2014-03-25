@@ -16,14 +16,25 @@ using TechTalk.SpecFlow;
 
 namespace CleanCart.AcceptanceTests.Steps
 {
+    /// <summary>
+    /// Those steps are for end-to-end tests. 
+    /// 
+    /// The range of the test is from UI down to the DB all integrated. 
+    ///     - Input are made by piloting the UI (Selenium).
+    ///     - Verifications are made on the resulting UI (Selenium) or by cheching directly in the DB
+    /// 
+    /// It means that they use a real web server, with a real DB (TODO) 
+    /// 
+    /// WARNING: Those tests are more fragile and don't reset since we use a real published Web Server. So, 
+    /// we should try to use them as little as possible.
+    /// </summary>
     [Binding]
     class ShopCatalogEnd2EndSteps
     {
         private const string NoTitle = "";
         private const string NoCode = "";
-        private readonly String[] _titles = { "ITEM 1", "item 2" };
 
-        private readonly Fixture _fixture = new Fixture();
+        private readonly Fixture _autoGenerator = new Fixture();
         private AddShopCatalogFixture _addShopCatalogFixture;
 
         private string _lastAddedItemTitle;
@@ -108,12 +119,12 @@ namespace CleanCart.AcceptanceTests.Steps
 
         private string CreateItemCode()
         {
-            return _fixture.Create<String>("Code");
+            return _autoGenerator.Create("Code");
         }
 
         private string CreateItemTitle()
         {
-            return _fixture.Create<String>("Title");
+            return _autoGenerator.Create("Title");
         }
 
     }
