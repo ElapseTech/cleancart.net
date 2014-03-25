@@ -28,7 +28,7 @@ namespace CleanCart.ApplicationServices.Tests.Assemblers
         public void SetupAssembler()
         {
             _itemFactory = new Mock<ICatalogItemFactory>();
-            _itemAssembler = new CatalogItemAssembler(_itemFactory.Object);
+            _itemAssembler = new CatalogItemAssembler();
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace CleanCart.ApplicationServices.Tests.Assemblers
             var egg = CreateCatalogItemMock(_eggCode, EggTitle);
             _itemFactory.Setup(x => x.CreateCatalogItem(_eggCode, EggTitle)).Returns(egg.Object);
 
-            var itemReturned = _itemAssembler.FromDTO(itemDTO);
+            var itemReturned = _itemAssembler.FromDTO(itemDTO, _itemFactory.Object);
 
             Assert.AreEqual(egg.Object, itemReturned);
         }

@@ -6,5 +6,7 @@ namespace CleanCart.ViewModels.ShopCatalog
     public class ShopCatalogViewModel
     {
         public IEnumerable<CatalogItemDTO> CatalogItems { get; set; }
+
+        public CatalogItemDTO AddItemForm { get; set; }
     }
 }

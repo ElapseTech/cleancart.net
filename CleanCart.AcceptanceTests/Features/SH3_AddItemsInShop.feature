@@ -4,26 +4,26 @@
 	In order to make new items available to my customers
 
 Scenario: Add an item
-	Given A shop catalog
+	Given The shop catalog site
 	When I add a new item 
-	Then the item is added to the catalog
+	Then the item is shown in the catalog
 
 Scenario: Add multiple items
-	Given A shop catalog
+	Given The shop catalog site
 	When I add a new item
 	Then I can add another item
 
 Scenario: A title is mandatory
-	Given A shop catalog
+	Given The shop catalog site
 	When I add a new item with no title
 	Then an error is reported
 
 Scenario: An item code is mandatory
-	Given A shop catalog
+	Given The shop catalog site
 	When I add a new item with no item code
 	Then an error is reported
 
 Scenario: The item code must be unique
-	Given A shop catalog
+	Given The shop catalog site
 	And an item with code 'I1' in the catalog
 	When I add a new item with the code 'I1'

@@ -1,4 +1,5 @@
-﻿using CleanCart.ApplicationServices;
+﻿using System.Web.Mvc;
+using CleanCart.ApplicationServices;
 using CleanCart.ApplicationServices.Dto;
 using CleanCart.Controllers;
 using CleanCart.ViewModels.ShopCatalog;
@@ -12,30 +13,50 @@ namespace CleanCart.Tests.Controllers
     [TestClass]
     public class ShopCatalogControllerTest
     {
+        private const string SomeCode = "CODE";
+        private const string SomeTitle = "Title";
 
-        [TestMethod]
-        public void IndexShouldRetrivedListItemsFromService()
+        private Mock<IShopCatalogService> _service;
+        private ShopCatalogController _shopCatalogController;
+        private List<CatalogItemDTO> _catalogItemsDtos;
+
+        [TestInitialize]
+        public void ConfigureTheControllerWithAServiceWithSomeItems()
         {
-            var service = new Mock<IShopCatalogService>();
-            var shopCatalogController = new ShopCatalogController(service.Object);
+            _service = new Mock<IShopCatalogService>();
+            _shopCatalogController = new ShopCatalogController(_service.Object);
 
-            shopCatalogController.Index();
-
-            service.Verify(x => x.ListCatalogItems());
+            _catalogItemsDtos = new List<CatalogItemDTO>();
+            _service.Setup(x => x.ListCatalogItems()).Returns(_catalogItemsDtos);
         }
 
         [TestMethod]
-        public void IndexShouldListAllItems()
+        public void IndexShouldGenerateAViewWithAllItems()
         {
-            var service = new Mock<IShopCatalogService>();
-            var catalogItemDtos = new List<CatalogItemDTO>();
-            service.Setup(x => x.ListCatalogItems()).Returns(catalogItemDtos);
-            var shopCatalogController = new ShopCatalogController(service.Object);
+            var viewResult = _shopCatalogController.Index();
+            AssertViewResultContainsAllItems(viewResult);
+        }
 
-            var viewResult = shopCatalogController.Index();
+        [TestMethod]
+        public void AddItemShouldAddTheItem()
+        {
+            var newItemForm = new CatalogItemDTO(SomeCode, SomeTitle);
+            _shopCatalogController.AddItem(newItemForm);
+            _service.Verify(x => x.AddCatalogItem(newItemForm));
+        }
 
+        [TestMethod]
+        public void AddItemShouldGenerateAViewWithAllItems()
+        {
+            var newItemForm = new CatalogItemDTO(SomeCode, SomeTitle);
+            var viewResult = _shopCatalogController.AddItem(newItemForm);
+            AssertViewResultContainsAllItems(viewResult);
+        }
+
+        private void AssertViewResultContainsAllItems(ViewResult viewResult)
+        {
             var viewModel = viewResult.Model as ShopCatalogViewModel;
-            viewModel.CatalogItems.Should().BeEquivalentTo(catalogItemDtos);
+            viewModel.CatalogItems.Should().BeEquivalentTo(_catalogItemsDtos);
         }
     }
 }

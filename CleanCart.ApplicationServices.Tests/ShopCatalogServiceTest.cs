@@ -14,7 +14,9 @@ namespace CleanCart.ApplicationServices.Tests
         private List<CatalogItem> _catalogItems;
         private List<CatalogItemDTO> _itemsDTOs;
         private Mock<ICatalogItemRepository> _catalogItemRepository;
+        private Mock<ICatalogItemFactory> _catalogItemFactory; 
         private Mock<CatalogItemAssembler> _assembler;
+
         private ShopCatalogService _shopCatalogService;
 
         [TestInitialize]
@@ -22,7 +24,8 @@ namespace CleanCart.ApplicationServices.Tests
         {
             SetupCatalogItemRespositoriesWithSomeItems();
             SetupAssemblerToConvertCatalogItems();
-            _shopCatalogService = new ShopCatalogService(_catalogItemRepository.Object, _assembler.Object);
+            _catalogItemFactory = new Mock<ICatalogItemFactory>();
+            _shopCatalogService = new ShopCatalogService(_catalogItemRepository.Object, _catalogItemFactory.Object, _assembler.Object);
         }
 
         private void SetupCatalogItemRespositoriesWithSomeItems()
@@ -58,8 +61,8 @@ namespace CleanCart.ApplicationServices.Tests
         public void CanAddAnItemFromDTO()
         {
             var item = new Mock<CatalogItem>();
-            var itemDTO = new CatalogItemDTO("I1", "A title");
-            _assembler.Setup(x => x.FromDTO(itemDTO)).Returns(item.Object);
+            var itemDTO = new CatalogItemDTO("I1", "A title"); //TODO
+            _assembler.Setup(x => x.FromDTO(itemDTO, _catalogItemFactory.Object)).Returns(item.Object);
 
             _shopCatalogService.AddCatalogItem(itemDTO);
 

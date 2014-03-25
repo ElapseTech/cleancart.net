@@ -111,7 +111,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SH1_DisplayShopCatalog.feature</DependentUpon>
     </Compile>
-    <Compile Include="Steps\ShopCatalogSteps.cs" />
+    <Compile Include="Steps\ShopCatalogEnd2EndSteps.cs" />
+    <Compile Include="Steps\ShopCatalogServiceSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,0 +1,12 @@
+﻿@model CleanCart.ApplicationServices.Dto.CatalogItemDTO
+
+@using (Html.BeginForm("AddItem", "ShopCatalog", FormMethod.Post, new {id = "catalog-add-item"}))
+{
+    @Html.LabelFor(x => x.CodeText)
+    @Html.EditorFor(x => x.CodeText)
+    
+    @Html.LabelFor(x => x.Title)
+    @Html.EditorFor(x => x.Title)
+    
+    <button>Create</button>
+}

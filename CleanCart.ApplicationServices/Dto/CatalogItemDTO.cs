@@ -1,14 +1,23 @@
-﻿namespace CleanCart.ApplicationServices.Dto
+﻿using System.ComponentModel;
+
+namespace CleanCart.ApplicationServices.Dto
 {
     public sealed class CatalogItemDTO
     {
+        public CatalogItemDTO()
+        {
+        }
+
         public CatalogItemDTO(string codeText, string title)
         {
             Title = title;
             CodeText = codeText;
         }
 
-        public string Title { get; private set; }
-        public string CodeText { get; private set; }
+        [DisplayName("Title")]
+        public string Title { get; set; }
+
+        [DisplayName("Code")]
+        public string CodeText { get; set; }
     }
 }

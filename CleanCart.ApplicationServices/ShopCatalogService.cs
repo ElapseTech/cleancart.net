@@ -10,15 +10,18 @@ namespace CleanCart.ApplicationServices
     {
         private readonly ICatalogItemRepository _catalogItemRepository;
         private readonly CatalogItemAssembler _catalogItemAssembler;
+        private ICatalogItemFactory _catalogItemFactory;
 
         public ShopCatalogService()
         {
             _catalogItemRepository = ServiceLocator.Locator.Resolve<ICatalogItemRepository>();
+            _catalogItemFactory = ServiceLocator.Locator.Resolve<ICatalogItemFactory>();
             _catalogItemAssembler = new CatalogItemAssembler();
         }
 
-        public ShopCatalogService(ICatalogItemRepository catalogItemRepository, CatalogItemAssembler catalogItemAssembler)
+        public ShopCatalogService(ICatalogItemRepository catalogItemRepository, ICatalogItemFactory catalogItemFactory, CatalogItemAssembler catalogItemAssembler)
         {
+            _catalogItemFactory = catalogItemFactory;
             _catalogItemRepository = catalogItemRepository;
             _catalogItemAssembler = catalogItemAssembler;
         }
@@ -32,7 +35,7 @@ namespace CleanCart.ApplicationServices
 
         public void AddCatalogItem(CatalogItemDTO catalogItemDTO)
         {
-            var catalogItem = _catalogItemAssembler.FromDTO(catalogItemDTO);
+            var catalogItem = _catalogItemAssembler.FromDTO(catalogItemDTO, _catalogItemFactory);
             _catalogItemRepository.Persist(catalogItem);
         }
     }

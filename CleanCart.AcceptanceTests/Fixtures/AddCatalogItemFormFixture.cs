@@ -23,7 +23,7 @@ namespace CleanCart.AcceptanceTests.Fixtures
 
         public void SubmitForm()
         {
-            Driver.FindElement(By.CssSelector("form button")).Click();
+            Driver.FindElement(By.CssSelector("form")).Submit();
         }
     }
 }

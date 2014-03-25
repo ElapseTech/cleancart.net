@@ -16,37 +16,27 @@ using TechTalk.SpecFlow;
 namespace CleanCart.AcceptanceTests.Steps
 {
     [Binding]
-    class ShopCatalogSteps
+    class ShopCatalogServiceSteps
     {
+        private readonly Fixture _fixture = new Fixture();
+
         private const string NoTitle = "";
         private const string NoCode = "";
         private readonly String[] _titles = { "ITEM 1", "item 2" };
 
-        private readonly Fixture _fixture = new Fixture();
-
         private InMemoryCatalogItemRepository _catalogItemRepository;
+        private ICatalogItemFactory _catalogItemFactory;
         private readonly CatalogItemAssembler _catalogItemAssembler = new CatalogItemAssembler();
+
         private ViewResult _shopCatalogViewResult;
+
         private CatalogItemCode _lastAddedCatalogItemCode;
-
-        private AddCatalogItemFormFixture _addCatalogItemFormFixture;
-
-        [BeforeScenario]
-        public void CreateFixture()
-        {
-            _addCatalogItemFormFixture = new AddCatalogItemFormFixture();
-        }
-
-        [AfterScenario]
-        public void CloseBrowser()
-        {
-            _addCatalogItemFormFixture.CloseBrowser();
-        }
 
         [Given(@"A shop catalog")]
         public void GivenAShopACatalog()
         {
             _catalogItemRepository = new InMemoryCatalogItemRepository();
+            _catalogItemFactory = new InMemoryCatalogItemFactory();
         }
 
         [Given(@"Some items in the catalog")]
@@ -73,64 +63,17 @@ namespace CleanCart.AcceptanceTests.Steps
         [When(@"I visit the catalog")]
         public void WhenIVisitTheCatalog()
         {
-            var shopCatalogService = new ShopCatalogService(_catalogItemRepository, _catalogItemAssembler);
+            var shopCatalogService = new ShopCatalogService(_catalogItemRepository, _catalogItemFactory, _catalogItemAssembler);
             var shopCatalogController = new ShopCatalogController(shopCatalogService);
             _shopCatalogViewResult = shopCatalogController.Index();
         }
 
-        [When(@"I add a new item")]
-        public void WhenIAddANewItem()
-        {
-            var itemCode = CreateItemCode();
-            var itemTitle = CreateItemTitle();
-            FillInCatalogItemFormAndSubmitIt(itemCode, itemTitle);
-        }
-
-        [When(@"I add a new item with no title")]
-        public void WhenIAddANewItemWithNoTitle()
-        {
-            var itemCode = CreateItemCode();
-            FillInCatalogItemFormAndSubmitIt(itemCode, NoTitle);
-        }
-
-        [When(@"I add a new item with no item code")]
-        public void WhenIAddANewItemWithNoItemCode()
-        {
-            var itemTitle = CreateItemTitle();
-            FillInCatalogItemFormAndSubmitIt(NoCode, itemTitle);
-        }
-
-        [When(@"I add a new item with the code '(.*)'")]
-        public void WhenIAddANewItemWithTheCode(string itemCode)
-        {
-            var itemTitle = CreateItemTitle();
-            FillInCatalogItemFormAndSubmitIt(itemCode, itemTitle);
-        }
-
-        private void FillInCatalogItemFormAndSubmitIt(string itemCode, string itemTitle)
-        {
-            _addCatalogItemFormFixture.NavigateToForm();
-            _addCatalogItemFormFixture.FillInItemCode(itemCode);
-            _addCatalogItemFormFixture.FillInTitle(itemTitle);
-            _addCatalogItemFormFixture.SubmitForm();
-        }
-
-
-
-        [Then(@"all items' title are shown")]
-        public void ThenAllItemsTitleAreShown()
+        [Then(@"all items' title are present")]
+        public void ThenAllItemsTitleArePresent()
         {
             var shopCatalogViewModel = _shopCatalogViewResult.Model as ShopCatalogViewModel;
             shopCatalogViewModel.CatalogItems.Select(x => x.Title).Should().BeEquivalentTo(_titles);
         }
-
-
-        [Then(@"an error is reported")]
-        public void ThenAnErrorIsReported()
-        {
-            ScenarioContext.Current.Pending();
-        }
-
 
         [Then(@"the item is added to the catalog")]
         public void ThenTheItemIsAddedToTheCatalog()
@@ -138,13 +81,11 @@ namespace CleanCart.AcceptanceTests.Steps
             _catalogItemRepository.FindByItemCode(_lastAddedCatalogItemCode);
         }
 
-
-        [Then(@"I can add another item")]
-        public void ThenICanAddAnotherItem()
+        private void PersistANewItemToCatalog(CatalogItemCode catalogItemCode, string itemTitle)
         {
-            ScenarioContext.Current.Pending();
+            var item = new InMemoryCatalogItem(catalogItemCode, itemTitle);
+            _catalogItemRepository.Persist(item);
         }
-
 
 
         private string CreateItemCode()
@@ -156,13 +97,5 @@ namespace CleanCart.AcceptanceTests.Steps
         {
             return _fixture.Create<String>("Title");
         }
-
-        private void PersistANewItemToCatalog(CatalogItemCode catalogItemCode, string itemTitle)
-        {
-            var item = new InMemoryCatalogItem(catalogItemCode, itemTitle);
-            _catalogItemRepository.Persist(item);
-        }
-
-
     }
 }

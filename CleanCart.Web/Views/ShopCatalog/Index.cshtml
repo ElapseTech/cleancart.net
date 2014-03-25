@@ -11,9 +11,4 @@
 
 <h3>Add an item</h3>
 
-@using (Html.BeginForm())
-{
-    <input type="text" name="itemCode" />
-    <input type="text" name="itemTitle" />
-    <button>Create</button>
-}
+@Html.Partial("_ItemForm", Model.AddItemForm)
