@@ -1,4 +1,5 @@
-﻿using CleanCart.ApplicationServices;
+﻿using CleanCart.AcceptanceTests.Fixtures;
+using CleanCart.ApplicationServices;
 using CleanCart.ApplicationServices.Assemblers;
 using CleanCart.Controllers;
 using CleanCart.Domain;
@@ -27,6 +28,20 @@ namespace CleanCart.AcceptanceTests.Steps
         private readonly CatalogItemAssembler _catalogItemAssembler = new CatalogItemAssembler();
         private ViewResult _shopCatalogViewResult;
         private CatalogItemCode _lastAddedCatalogItemCode;
+
+        private AddCatalogItemFormFixture _addCatalogItemFormFixture;
+
+        [BeforeScenario]
+        public void CreateFixture()
+        {
+            _addCatalogItemFormFixture = new AddCatalogItemFormFixture();
+        }
+
+        [AfterScenario]
+        public void CloseBrowser()
+        {
+            _addCatalogItemFormFixture.CloseBrowser();
+        }
 
         [Given(@"A shop catalog")]
         public void GivenAShopACatalog()
@@ -68,34 +83,36 @@ namespace CleanCart.AcceptanceTests.Steps
         {
             var itemCode = CreateItemCode();
             var itemTitle = CreateItemTitle();
-            WhenIAddANewItemWithTheCodeAndTheTitle(itemCode, itemTitle);
+            FillInCatalogItemFormAndSubmitIt(itemCode, itemTitle);
         }
 
         [When(@"I add a new item with no title")]
         public void WhenIAddANewItemWithNoTitle()
         {
             var itemCode = CreateItemCode();
-            WhenIAddANewItemWithTheCodeAndTheTitle(itemCode, NoTitle);
+            FillInCatalogItemFormAndSubmitIt(itemCode, NoTitle);
         }
 
         [When(@"I add a new item with no item code")]
         public void WhenIAddANewItemWithNoItemCode()
         {
             var itemTitle = CreateItemTitle();
-            WhenIAddANewItemWithTheCodeAndTheTitle(NoCode, itemTitle);
+            FillInCatalogItemFormAndSubmitIt(NoCode, itemTitle);
         }
 
         [When(@"I add a new item with the code '(.*)'")]
         public void WhenIAddANewItemWithTheCode(string itemCode)
         {
             var itemTitle = CreateItemTitle();
-            WhenIAddANewItemWithTheCodeAndTheTitle(itemCode, itemTitle);
+            FillInCatalogItemFormAndSubmitIt(itemCode, itemTitle);
         }
 
-        [When(@"I add a new item with the code '(.*)' and the title '(.*)'")]
-        public void WhenIAddANewItemWithTheCodeAndTheTitle(string itemCode, string itemTitle)
+        private void FillInCatalogItemFormAndSubmitIt(string itemCode, string itemTitle)
         {
-            ScenarioContext.Current.Pending();
+            _addCatalogItemFormFixture.NavigateToForm();
+            _addCatalogItemFormFixture.FillInItemCode(itemCode);
+            _addCatalogItemFormFixture.FillInTitle(itemTitle);
+            _addCatalogItemFormFixture.SubmitForm();
         }
 
 
