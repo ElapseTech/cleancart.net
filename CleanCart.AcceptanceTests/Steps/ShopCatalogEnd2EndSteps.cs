@@ -1,16 +1,5 @@
 ﻿using CleanCart.AcceptanceTests.Fixtures;
-using CleanCart.ApplicationServices;
-using CleanCart.ApplicationServices.Assemblers;
-using CleanCart.Controllers;
-using CleanCart.Domain;
-using CleanCart.Persistence.FakeInMemory;
-using CleanCart.Persistence.FakeInMemory.Entities;
-using CleanCart.ViewModels.ShopCatalog;
 using FluentAssertions;
-using System;
-using System.Linq;
-using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
 using TechTalk.SpecFlow;
 

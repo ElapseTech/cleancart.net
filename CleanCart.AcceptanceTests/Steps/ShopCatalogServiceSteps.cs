@@ -1,5 +1,4 @@
-﻿using CleanCart.AcceptanceTests.Fixtures;
-using CleanCart.ApplicationServices;
+﻿using CleanCart.ApplicationServices;
 using CleanCart.ApplicationServices.Assemblers;
 using CleanCart.Controllers;
 using CleanCart.Domain;
@@ -7,10 +6,10 @@ using CleanCart.Persistence.FakeInMemory;
 using CleanCart.Persistence.FakeInMemory.Entities;
 using CleanCart.ViewModels.ShopCatalog;
 using FluentAssertions;
+using Ploeh.AutoFixture;
 using System;
 using System.Linq;
 using System.Web.Mvc;
-using Ploeh.AutoFixture;
 using TechTalk.SpecFlow;
 
 namespace CleanCart.AcceptanceTests.Steps
@@ -71,11 +70,6 @@ namespace CleanCart.AcceptanceTests.Steps
             shopCatalogViewModel.CatalogItems.Select(x => x.Title).Should().BeEquivalentTo(_titles);
         }
 
-        [Then(@"the item is added to the catalog")]
-        public void ThenTheItemIsAddedToTheCatalog()
-        {
-            _catalogItemRepository.FindByItemCode(_lastAddedCatalogItemCode);
-        }
 
         private void PersistANewItemToCatalog(CatalogItemCode catalogItemCode, string itemTitle)
         {
