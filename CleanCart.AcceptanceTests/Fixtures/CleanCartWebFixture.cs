@@ -1,4 +1,4 @@
-﻿using CleanCart.AcceptanceTests.Helpers;
+﻿using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 
@@ -6,13 +6,20 @@ namespace CleanCart.AcceptanceTests.Fixtures
 {
     class CleanCartWebFixture
     {
-        protected readonly IWebDriver Driver;
+        private readonly Lazy<IWebDriver> _driver;
 
-        public CleanCartWebFixture() : this(new FirefoxDriver()) { }
-
-        public CleanCartWebFixture(IWebDriver driver)
+        protected IWebDriver Driver
         {
-            Driver = driver;
+            get { return _driver.Value; }
+        }
+
+        public CleanCartWebFixture() : this(new Lazy<IWebDriver>(() => new FirefoxDriver()))
+        {
+        }
+
+        public CleanCartWebFixture(Lazy<IWebDriver> driver)
+        {
+            _driver = driver;
         }
 
         public void CloseBrowser()
