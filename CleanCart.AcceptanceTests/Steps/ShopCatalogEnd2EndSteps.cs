@@ -17,7 +17,7 @@ namespace CleanCart.AcceptanceTests.Steps
     /// WARNING: Those tests are more fragile and don't reset since we use a real published Web Server. So, 
     /// we should try to use them as little as possible.
     /// </summary>
-    [Binding]
+    [Binding, Scope(Tag = "Web")]
     class ShopCatalogEnd2EndSteps
     {
         private const string NoTitle = "";
@@ -38,8 +38,8 @@ namespace CleanCart.AcceptanceTests.Steps
             }
         }
 
-        [Given(@"The shop catalog site")]
-        public void GivenTheShopCatalogSite()
+        [Given(@"The shop catalog page")]
+        public void GivenTheShopCatalogPage()
         {
             _addShopCatalogFixture = new AddShopCatalogFixture();
         }
@@ -47,7 +47,7 @@ namespace CleanCart.AcceptanceTests.Steps
         [When(@"I add a new item")]
         public void WhenIAddANewItem()
         {
-            var itemCode = CreateItemCode();
+            var itemCode = CreateItemCodeText();
             var itemTitle = CreateItemTitle();
             FillInCatalogItemFormAndSubmitIt(itemCode, itemTitle);
             _lastAddedItemTitle = itemTitle;
@@ -56,7 +56,7 @@ namespace CleanCart.AcceptanceTests.Steps
         [When(@"I add a new item with no title")]
         public void WhenIAddANewItemWithNoTitle()
         {
-            var itemCode = CreateItemCode();
+            var itemCode = CreateItemCodeText();
             FillInCatalogItemFormAndSubmitIt(itemCode, NoTitle);
         }
 
@@ -75,6 +75,34 @@ namespace CleanCart.AcceptanceTests.Steps
             _lastAddedItemTitle = itemTitle;
         }
 
+
+        [Then(@"the item is shown in the catalog")]
+        public void ThenTheItemIsAddedToTheCatalog()
+        {
+            AssertCatalogItemWithCodeIsShown(_lastAddedItemTitle);
+        }
+
+        [Then(@"I can add another item")]
+        public void ThenICanAddAnotherItem()
+        {
+            var itemCode = CreateItemCodeText();
+            var itemTitle = CreateItemTitle();
+            FillInCatalogItemFormAndSubmitIt(itemCode, itemTitle);
+
+            AssertCatalogItemWithCodeIsShown(itemTitle);
+        }
+
+
+        private string CreateItemCodeText()
+        {
+            return _autoGenerator.Create("Code");
+        }
+
+        private string CreateItemTitle()
+        {
+            return _autoGenerator.Create("Title");
+        }
+
         private void FillInCatalogItemFormAndSubmitIt(string itemCode, string itemTitle)
         {
             _addShopCatalogFixture.NavigateToForm();
@@ -83,37 +111,10 @@ namespace CleanCart.AcceptanceTests.Steps
             _addShopCatalogFixture.SubmitForm();
         }
 
-
-
-        [Then(@"the item is shown in the catalog")]
-        public void ThenTheItemIsAddedToTheCatalog()
+        private void AssertCatalogItemWithCodeIsShown(string itemTitle)
         {
-            var codeShown = _addShopCatalogFixture.CheckItemShown(_lastAddedItemTitle);
+            var codeShown = _addShopCatalogFixture.CheckItemShown(itemTitle);
             codeShown.Should().BeTrue();
-        }
-
-        [Then(@"an error is reported")]
-        public void ThenAnErrorIsReported()
-        {
-            ScenarioContext.Current.Pending();
-        }
-
-        [Then(@"I can add another item")]
-        public void ThenICanAddAnotherItem()
-        {
-            ScenarioContext.Current.Pending();
-        }
-
-
-
-        private string CreateItemCode()
-        {
-            return _autoGenerator.Create("Code");
-        }
-
-        private string CreateItemTitle()
-        {
-            return _autoGenerator.Create("Title");
         }
 
     }

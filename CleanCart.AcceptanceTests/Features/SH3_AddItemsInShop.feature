@@ -3,15 +3,18 @@
 	I want to be able to add items to the shop,
 	In order to make new items available to my customers
 
+@Web
 Scenario: Add an item
-	Given The shop catalog site
+	Given The shop catalog page
 	When I add a new item 
 	Then the item is shown in the catalog
 
+@Web
 Scenario: Add multiple items
-	Given The shop catalog site
+	Given The shop catalog page
 	When I add a new item
 	Then I can add another item
+
 
 Scenario: A title is mandatory
 	Given The shop catalog site
