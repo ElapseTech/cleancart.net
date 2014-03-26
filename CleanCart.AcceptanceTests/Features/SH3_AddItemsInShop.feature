@@ -34,5 +34,11 @@ Scenario: An item code is mandatory
 Scenario: The item code must be unique
 	Given A shop catalog
 	And an item with code 'I1' in the catalog
-	When I add a new item with the code 'I1'
+	When I add a new item with same code 'I1'
+	Then an error is reported
+	
+Scenario: The item title must be unique
+	Given A shop catalog
+	And an item with the title 'The Title' in the catalog
+	When I add a new item with the same title 'The Title'
 	Then an error is reported
