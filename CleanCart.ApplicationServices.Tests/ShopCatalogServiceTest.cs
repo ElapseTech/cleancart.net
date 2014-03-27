@@ -1,4 +1,5 @@
-﻿using CleanCart.ApplicationServices.Assemblers;
+﻿using System;
+using CleanCart.ApplicationServices.Assemblers;
 using CleanCart.ApplicationServices.Dto;
 using CleanCart.Domain;
 using FluentAssertions;
@@ -13,7 +14,9 @@ namespace CleanCart.ApplicationServices.Tests
     {
         private const string SomeCodeText = "I1";
         private const string ExistingCodeText = "EXISTING_CODE";
+
         private const string SomeTitle = "A title";
+        private const string NoTitle = "";
 
         private List<CatalogItem> _catalogItems;
         private List<CatalogItemDTO> _itemsDTOs;
@@ -75,4 +78,5 @@ namespace CleanCart.ApplicationServices.Tests
 
 
     }
+
 }
