@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextBase.cs" />
+    <Compile Include="EmtyInMemoryContext.cs" />
     <Compile Include="DemoInMemoryContext.cs" />
     <Compile Include="Configurations\IConfiguration.cs" />
     <Compile Include="Configurations\Persistence\InMemoryPersistenceConfiguration.cs" />
