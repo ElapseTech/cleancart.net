@@ -1,6 +1,7 @@
 ﻿using CleanCart.ApplicationServices;
 using CleanCart.ApplicationServices.Assemblers;
 using CleanCart.ApplicationServices.Dto;
+using CleanCart.ApplicationServices.Locator;
 using CleanCart.ConfigurationContexts;
 using CleanCart.Controllers;
 using CleanCart.Domain;
@@ -27,7 +28,7 @@ namespace CleanCart.AcceptanceTests.Steps
 
         private InMemoryCatalogItemRepository _catalogItemRepository;
         private ICatalogItemFactory _catalogItemFactory;
-        private readonly CatalogItemAssembler _catalogItemAssembler = new CatalogItemAssembler();
+        private CatalogItemAssembler _catalogItemAssembler;
 
         private ViewResult _shopCatalogViewResult;
         private ShopCatalogService _shopCatalogService;
@@ -35,12 +36,14 @@ namespace CleanCart.AcceptanceTests.Steps
         private bool _errorIsReported;
 
         [BeforeScenario]
-        public void ConfigureControllerUsingTheDemoInMemoryContext()
+        public void ConfigureControllerAndServices()
         {
-            var demoInMemoryContext = new DemoInMemoryContext();
-            demoInMemoryContext.Apply();
+            _catalogItemRepository = new InMemoryCatalogItemRepository();
+            _catalogItemFactory = new InMemoryCatalogItemFactory();
+            _catalogItemAssembler = new CatalogItemAssembler();
 
-            _shopCatalogService = new ShopCatalogService();
+            _shopCatalogService = new ShopCatalogService(_catalogItemRepository, _catalogItemFactory,
+                _catalogItemAssembler);
             _shopCatalogController = new ShopCatalogController(_shopCatalogService);
         }
 
@@ -55,8 +58,6 @@ namespace CleanCart.AcceptanceTests.Steps
         [Given(@"A shop catalog")]
         public void GivenAShopACatalog()
         {
-            _catalogItemRepository = new InMemoryCatalogItemRepository();
-            _catalogItemFactory = new InMemoryCatalogItemFactory();
         }
 
         [Given(@"Some items in the catalog")]
