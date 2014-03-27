@@ -73,20 +73,6 @@ namespace CleanCart.ApplicationServices.Tests
             _catalogItemRepository.Verify(x => x.Persist(item.Object));
         }
 
-        [TestMethod, Ignore]
-        public void AddItemShouldThrowExceptionGivenAlreadyExistingCode()
-        {
-            var itemDTO = new CatalogItemDTO(ExistingCodeText, SomeTitle);
-            var existingCode = new CatalogItemCode(ExistingCodeText);
-            var item = new Mock<CatalogItem>();
-            item.Setup(x => x.Code).Returns(existingCode);
-            _assembler.Setup(x => x.FromDTO(itemDTO, _catalogItemFactory.Object)).Returns(item.Object);
-            _catalogItemRepository.Setup(x => x.FindByItemCode(existingCode)).Returns(item.Object);
-            
-            _shopCatalogService.AddCatalogItem(itemDTO);
-
-        }
-
 
     }
 }
