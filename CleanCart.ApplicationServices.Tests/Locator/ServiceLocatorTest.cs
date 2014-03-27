@@ -43,7 +43,7 @@ namespace CleanCart.ApplicationServices.Tests.Locator
         }
 
         [TestMethod]
-        public void CanCheckIfAServiceIsRegistered()
+        public void CanCheckIfAServiceIsDefined()
         {
             _locator.Register<ITestService>(_theImplementation);
             _locator.IsServiceDefined(typeof(ITestService)).Should().BeTrue();
@@ -55,6 +55,18 @@ namespace CleanCart.ApplicationServices.Tests.Locator
             _locator.IsServiceDefined(typeof(ITestService)).Should().BeFalse();
         }
 
+        [TestMethod]
+        public void ResetShouldUnregisterAllServices()
+        {
+            _locator.Register<ITestService>(_theImplementation);
+            _locator.Register<IOtherTestService>(new OtherTestImplementation());
+
+            _locator.Reset();
+
+            _locator.IsServiceDefined(typeof (ITestService)).Should().BeFalse();
+            _locator.IsServiceDefined(typeof (IOtherTestService)).Should().BeFalse();
+        }
+
 
     }
 
@@ -63,6 +75,14 @@ namespace CleanCart.ApplicationServices.Tests.Locator
     }
 
     internal class TestImplementation : ITestService
+    {
+    }
+
+    internal interface IOtherTestService
+    {
+    }
+
+    internal class OtherTestImplementation : IOtherTestService
     {
     }
 }

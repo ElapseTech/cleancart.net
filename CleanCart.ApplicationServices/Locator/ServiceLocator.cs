@@ -36,6 +36,11 @@ namespace CleanCart.ApplicationServices.Locator
             return _implementations.ContainsKey(serviceType);
         }
 
+        public void Reset()
+        {
+            _implementations.Clear();
+        }
+
 
         public static ServiceLocator Locator
         {
