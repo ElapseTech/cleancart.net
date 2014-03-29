@@ -27,7 +27,7 @@ namespace CleanCart.AcceptanceTests.Steps
         private readonly String[] _titles = { "ITEM 1", "item 2" };
 
         private InMemoryCatalogItemRepository _catalogItemRepository;
-        private ICatalogItemFactory _catalogItemFactory;
+        private CatalogItemFactory _catalogItemFactory;
         private CatalogItemAssembler _catalogItemAssembler;
 
         private ViewResult _shopCatalogViewResult;
@@ -90,7 +90,7 @@ namespace CleanCart.AcceptanceTests.Steps
             {
                 _shopCatalogService.AddCatalogItem(newItemDTO);
             }
-            catch (ItemAlreadyExistsException e)
+            catch (CatalogItemCreationException e)
             {
                 _errorIsReported = true;
             }

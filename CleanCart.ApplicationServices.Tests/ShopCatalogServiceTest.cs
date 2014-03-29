@@ -21,7 +21,7 @@ namespace CleanCart.ApplicationServices.Tests
         private List<CatalogItem> _catalogItems;
         private List<CatalogItemDTO> _itemsDTOs;
         private Mock<ICatalogItemRepository> _catalogItemRepository;
-        private Mock<ICatalogItemFactory> _catalogItemFactory; 
+        private Mock<CatalogItemFactory> _catalogItemFactory; 
         private Mock<CatalogItemAssembler> _assembler;
 
         private ShopCatalogService _shopCatalogService;
@@ -31,7 +31,7 @@ namespace CleanCart.ApplicationServices.Tests
         {
             SetupCatalogItemRespositoriesWithSomeItems();
             SetupAssemblerToConvertCatalogItems();
-            _catalogItemFactory = new Mock<ICatalogItemFactory>();
+            _catalogItemFactory = new Mock<CatalogItemFactory>();
             _shopCatalogService = new ShopCatalogService(_catalogItemRepository.Object, _catalogItemFactory.Object, _assembler.Object);
         }
 

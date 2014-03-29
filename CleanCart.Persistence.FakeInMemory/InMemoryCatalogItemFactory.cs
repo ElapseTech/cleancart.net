@@ -3,11 +3,12 @@ using CleanCart.Persistence.FakeInMemory.Entities;
 
 namespace CleanCart.Persistence.FakeInMemory
 {
-    public class InMemoryCatalogItemFactory : ICatalogItemFactory
+    public class InMemoryCatalogItemFactory : CatalogItemFactory
     {
-        public CatalogItem CreateCatalogItem(CatalogItemCode code, string title)
+        protected override CatalogItem CreateConcreteCatalogItem(CatalogItemCode code, string title)
         {
             return new InMemoryCatalogItem(code, title);
         }
+
     }
 }

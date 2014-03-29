@@ -10,16 +10,16 @@ namespace CleanCart.ApplicationServices
     {
         private readonly ICatalogItemRepository _catalogItemRepository;
         private readonly CatalogItemAssembler _catalogItemAssembler;
-        private ICatalogItemFactory _catalogItemFactory;
+        private CatalogItemFactory _catalogItemFactory;
 
         public ShopCatalogService()
         {
             _catalogItemRepository = ServiceLocator.Locator.Resolve<ICatalogItemRepository>();
-            _catalogItemFactory = ServiceLocator.Locator.Resolve<ICatalogItemFactory>();
+            _catalogItemFactory = ServiceLocator.Locator.Resolve<CatalogItemFactory>();
             _catalogItemAssembler = new CatalogItemAssembler();
         }
 
-        public ShopCatalogService(ICatalogItemRepository catalogItemRepository, ICatalogItemFactory catalogItemFactory, CatalogItemAssembler catalogItemAssembler)
+        public ShopCatalogService(ICatalogItemRepository catalogItemRepository, CatalogItemFactory catalogItemFactory, CatalogItemAssembler catalogItemAssembler)
         {
             _catalogItemFactory = catalogItemFactory;
             _catalogItemRepository = catalogItemRepository;

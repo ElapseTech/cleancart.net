@@ -18,7 +18,7 @@ namespace CleanCart.ApplicationServices.Assemblers
             return catalogItems.Select(ToDto).ToList();
         }
 
-        public virtual CatalogItem FromDTO(CatalogItemDTO itemDTO, ICatalogItemFactory _catalogItemFactory)
+        public virtual CatalogItem FromDTO(CatalogItemDTO itemDTO, CatalogItemFactory _catalogItemFactory)
         {
             var code = new CatalogItemCode(itemDTO.CodeText);
             string title = itemDTO.Title;

@@ -20,14 +20,14 @@ namespace CleanCart.ApplicationServices.Tests.Assemblers
         const string FirstTitle = "FIRST TITLE";
         const string SecondTitle = "SECOND TITLE";
 
-        private Mock<ICatalogItemFactory> _itemFactory;
+        private Mock<CatalogItemFactory> _itemFactory;
 
         private CatalogItemAssembler _itemAssembler;
 
         [TestInitialize]
         public void SetupAssembler()
         {
-            _itemFactory = new Mock<ICatalogItemFactory>();
+            _itemFactory = new Mock<CatalogItemFactory>();
             _itemAssembler = new CatalogItemAssembler();
         }
 

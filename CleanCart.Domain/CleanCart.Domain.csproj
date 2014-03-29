@@ -41,10 +41,10 @@
   <ItemGroup>
     <Compile Include="CatalogItem.cs" />
     <Compile Include="CatalogItemNotFoundException.cs" />
-    <Compile Include="ICatalogItemFactory.cs" />
+    <Compile Include="CatalogItemFactory.cs" />
     <Compile Include="ICatalogItemRepository.cs" />
     <Compile Include="CatalogItemCode.cs" />
-    <Compile Include="ItemAlreadyExistsException.cs" />
+    <Compile Include="CatalogItemCreationException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
