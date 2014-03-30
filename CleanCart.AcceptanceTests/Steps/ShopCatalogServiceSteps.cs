@@ -1,4 +1,5 @@
-﻿using CleanCart.ApplicationServices;
+﻿using System.Collections.Generic;
+using CleanCart.ApplicationServices;
 using CleanCart.ApplicationServices.Assemblers;
 using CleanCart.ApplicationServices.Dto;
 using CleanCart.ApplicationServices.Locator;
@@ -23,12 +24,14 @@ namespace CleanCart.AcceptanceTests.Steps
     {
         private readonly Fixture _autoGenerator = new Fixture();
 
-        private const string NoTitle = "";
-        private readonly String[] _titles = { "ITEM 1", "item 2" };
+        private const string NoTitle = null;
+        private const string NoItemCode = null;
 
         private InMemoryCatalogItemRepository _catalogItemRepository;
         private CatalogItemFactory _catalogItemFactory;
         private CatalogItemAssembler _catalogItemAssembler;
+
+        private IList<string> _registeredTitles;
 
         private ViewResult _shopCatalogViewResult;
         private ShopCatalogService _shopCatalogService;
@@ -42,17 +45,19 @@ namespace CleanCart.AcceptanceTests.Steps
             _catalogItemFactory = new InMemoryCatalogItemFactory();
             _catalogItemAssembler = new CatalogItemAssembler();
 
-            _shopCatalogService = new ShopCatalogService(_catalogItemRepository, _catalogItemFactory,
-                _catalogItemAssembler);
+            _shopCatalogService = new ShopCatalogService(_catalogItemRepository, _catalogItemFactory, _catalogItemAssembler);
             _shopCatalogController = new ShopCatalogController(_shopCatalogService);
         }
 
         [BeforeScenario]
-        public void ResetResults()
+        public void ResetResultsAndDatas()
         {
             _shopCatalogViewResult = null;
             _errorIsReported = false;
-        } 
+
+            _registeredTitles = new List<string>();
+            ;
+        }
 
 
         [Given(@"A shop catalog")]
@@ -63,15 +68,14 @@ namespace CleanCart.AcceptanceTests.Steps
         [Given(@"Some items in the catalog")]
         public void GivenSomeItemsInTheCatalog()
         {
-            PersistANewItemToCatalog(CreateItemCode(), _titles[0]);
-            PersistANewItemToCatalog(CreateItemCode(), _titles[1]);
+            PersistItemToCatalog(AnItemCodeText(), AnItemTitle());
+            PersistItemToCatalog(AnItemCodeText(), AnItemTitle());
         }
 
         [Given(@"an item with code '(.*)' in the catalog")]
         public void GivenAnItemWithCodeInTheCatalog(string itemCodeText)
         {
-            var itemTitle = CreateItemTitle();
-            PersistANewItemToCatalog(itemCodeText, itemTitle);
+            PersistItemToCatalog(itemCodeText, AnItemTitle());
         }
 
 
@@ -85,23 +89,24 @@ namespace CleanCart.AcceptanceTests.Steps
         [When(@"I add a new item with no title")]
         public void WhenIAddANewItemWithNoTitle()
         {
-            var newItemDTO = new CatalogItemDTO(CreateItemCode(), NoTitle);
-            try
-            {
-                _shopCatalogService.AddCatalogItem(newItemDTO);
-            }
-            catch (CatalogItemCreationException e)
-            {
-                _errorIsReported = true;
-            }
+            var itemDTO = new CatalogItemDTO(AnItemCodeText(), NoTitle);
+            AddCatalogItemUsingTheServiceLayer(itemDTO);
+        }
+
+        [When(@"I add a new item with no item code")]
+        public void WhenIAddANewItemWithNoItemCode()
+        {
+            var itemDTO = new CatalogItemDTO(NoItemCode, AnItemTitle());
+            AddCatalogItemUsingTheServiceLayer(itemDTO);
         }
 
 
+
         [Then(@"all items' title are present")]
-        public void ThenAllItemsTitleArePresent()
+        public void ThenAllRegisteredItemsTitleArePresent()
         {
             var shopCatalogViewModel = _shopCatalogViewResult.Model as ShopCatalogViewModel;
-            shopCatalogViewModel.CatalogItems.Select(x => x.Title).Should().BeEquivalentTo(_titles);
+            shopCatalogViewModel.CatalogItems.Select(x => x.Title).Should().BeEquivalentTo(_registeredTitles);
         }
 
         [Then(@"an error is reported")]
@@ -112,20 +117,33 @@ namespace CleanCart.AcceptanceTests.Steps
 
 
 
-        private void PersistANewItemToCatalog(string catalogItemCodeText, string itemTitle)
+        private void PersistItemToCatalog(string catalogItemCodeText, string itemTitle)
         {
             var catalogItemCode = new CatalogItemCode(catalogItemCodeText);
             var item = new InMemoryCatalogItem(catalogItemCode, itemTitle);
             _catalogItemRepository.Persist(item);
+
+            _registeredTitles.Add(itemTitle);
         }
 
+        private void AddCatalogItemUsingTheServiceLayer(CatalogItemDTO newItemDTO)
+        {
+            try
+            {
+                _shopCatalogService.AddCatalogItem(newItemDTO);
+            }
+            catch (CatalogItemCreationException e)
+            {
+                _errorIsReported = true;
+            }
+        }
 
-        private string CreateItemCode()
+        private string AnItemCodeText()
         {
             return _autoGenerator.Create("Code");
         }
 
-        private string CreateItemTitle()
+        private string AnItemTitle()
         {
             return _autoGenerator.Create("Title");
         }

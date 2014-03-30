@@ -25,7 +25,7 @@ namespace CleanCart.AcceptanceTests.Steps
         private const string NoCode = "";
 
         private readonly Fixture _autoGenerator = new Fixture();
-        private AddShopCatalogFixture _addShopCatalogFixture;
+        private AddShopCatalogWebFixture _addShopCatalogWebFixture;
 
         private string _lastAddedItemTitle;
 
@@ -33,9 +33,9 @@ namespace CleanCart.AcceptanceTests.Steps
         [AfterScenario]
         public void CloseBrowser()
         {
-            if (_addShopCatalogFixture != null)
+            if (_addShopCatalogWebFixture != null)
             {
-                _addShopCatalogFixture.CloseBrowser();
+                _addShopCatalogWebFixture.CloseBrowser();
             }
         }
 
@@ -43,7 +43,7 @@ namespace CleanCart.AcceptanceTests.Steps
         [Given(@"The shop catalog page")]
         public void GivenTheShopCatalogPage()
         {
-            _addShopCatalogFixture = new AddShopCatalogFixture();
+            _addShopCatalogWebFixture = new AddShopCatalogWebFixture();
         }
 
         [Given(@"The add item catalog form")]
@@ -106,15 +106,15 @@ namespace CleanCart.AcceptanceTests.Steps
 
         private void FillInCatalogItemFormAndSubmitIt(string itemCode, string itemTitle)
         {
-            _addShopCatalogFixture.NavigateToForm();
-            _addShopCatalogFixture.FillInItemCode(itemCode);
-            _addShopCatalogFixture.FillInTitle(itemTitle);
-            _addShopCatalogFixture.SubmitForm();
+            _addShopCatalogWebFixture.NavigateToForm();
+            _addShopCatalogWebFixture.FillInItemCode(itemCode);
+            _addShopCatalogWebFixture.FillInTitle(itemTitle);
+            _addShopCatalogWebFixture.SubmitForm();
         }
 
         private void AssertCatalogItemWithCodeIsShown(string itemTitle)
         {
-            var codeShown = _addShopCatalogFixture.CheckItemShown(itemTitle);
+            var codeShown = _addShopCatalogWebFixture.CheckItemShown(itemTitle);
             codeShown.Should().BeTrue();
         }
 

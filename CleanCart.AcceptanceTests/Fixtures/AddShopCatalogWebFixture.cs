@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 
 namespace CleanCart.AcceptanceTests.Fixtures
 {
-    class AddShopCatalogFixture : CleanCartWebFixture
+    class AddShopCatalogWebFixture : CleanCartWebFixture
     {
         private readonly FormHelper<CatalogItemDTO> _formHelper = new FormHelper<CatalogItemDTO>();
  
