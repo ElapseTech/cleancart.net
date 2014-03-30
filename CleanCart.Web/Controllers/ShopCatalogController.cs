@@ -1,5 +1,6 @@
 ﻿using CleanCart.ApplicationServices;
 using CleanCart.ApplicationServices.Dto;
+using CleanCart.Domain;
 using CleanCart.ViewModels.ShopCatalog;
 using System.Web.Mvc;
 
@@ -27,7 +28,15 @@ namespace CleanCart.Controllers
         [HttpPost]
         public ViewResult AddItem(CatalogItemDTO catalogItemForm)
         {
-            _shopCatalogService.AddCatalogItem(catalogItemForm);
+            try
+            {
+                _shopCatalogService.AddCatalogItem(catalogItemForm);
+            }
+            catch (CatalogItemCreationException e)
+            {
+                ModelState.AddModelError("errors", e.Message);
+            }
+
             return GenerateShopCatalogViewResult();
         }
 

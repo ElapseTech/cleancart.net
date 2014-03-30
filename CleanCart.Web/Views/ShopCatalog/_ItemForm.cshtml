@@ -1,5 +1,7 @@
 ﻿@model CleanCart.ApplicationServices.Dto.CatalogItemDTO
 
+@Html.ValidationSummary()
+
 @using (Html.BeginForm("AddItem", "ShopCatalog", FormMethod.Post, new {id = "catalog-add-item"}))
 {
     @Html.LabelFor(x => x.CodeText)
