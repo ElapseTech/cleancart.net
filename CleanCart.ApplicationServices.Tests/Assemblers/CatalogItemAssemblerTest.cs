@@ -4,11 +4,13 @@ using CleanCart.Domain;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace CleanCart.ApplicationServices.Tests.Assemblers
 {
+    //TODO Refactor this test
     [TestClass]
     public class CatalogItemAssemblerTest
     {
@@ -74,6 +76,21 @@ namespace CleanCart.ApplicationServices.Tests.Assemblers
 
             Assert.AreEqual(egg.Object, itemReturned);
         }
+
+        [TestMethod]
+        public void NullCodeTextFromDTOShouldConvertToEmptyText()
+        {
+            var itemDTO = new CatalogItemDTO(null, EggTitle);
+            var emptyCode = new CatalogItemCode(String.Empty);
+
+            _itemAssembler.FromDTO(itemDTO, _itemFactory.Object);
+
+            _itemFactory.Verify(x => x.CreateCatalogItem(
+                It.Is<CatalogItemCode>(code => code.Equals(emptyCode)),
+                It.IsAny<string>()
+                ));
+        }
+
 
         private Mock<CatalogItem> CreateCatalogItemMock(string title)
         {

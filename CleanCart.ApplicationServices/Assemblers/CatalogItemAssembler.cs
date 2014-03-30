@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using CleanCart.ApplicationServices.Dto;
 using CleanCart.ApplicationServices.Locator;
@@ -18,11 +19,11 @@ namespace CleanCart.ApplicationServices.Assemblers
             return catalogItems.Select(ToDto).ToList();
         }
 
-        public virtual CatalogItem FromDTO(CatalogItemDTO itemDTO, CatalogItemFactory _catalogItemFactory)
+        public virtual CatalogItem FromDTO(CatalogItemDTO itemDTO, CatalogItemFactory catalogItemFactory)
         {
-            var code = new CatalogItemCode(itemDTO.CodeText);
+            var code = new CatalogItemCode(itemDTO.CodeText ?? String.Empty);
             string title = itemDTO.Title;
-            return _catalogItemFactory.CreateCatalogItem(code, title);
+            return catalogItemFactory.CreateCatalogItem(code, title);
         }
     }
 }
