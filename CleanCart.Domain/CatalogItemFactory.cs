@@ -4,7 +4,7 @@ namespace CleanCart.Domain
 {
     public abstract class CatalogItemFactory
     {
-        public CatalogItem CreateCatalogItem(CatalogItemCode code, string title)
+        public virtual CatalogItem CreateCatalogItem(CatalogItemCode code, string title)
         {
             ValidateCodeNotEmpty(code);
             ValidateTitleNotEmpty(title);
