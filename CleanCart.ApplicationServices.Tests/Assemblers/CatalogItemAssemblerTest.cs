@@ -7,6 +7,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ploeh.AutoFixture;
 
 namespace CleanCart.ApplicationServices.Tests.Assemblers
 {
@@ -14,13 +15,16 @@ namespace CleanCart.ApplicationServices.Tests.Assemblers
     [TestClass]
     public class CatalogItemAssemblerTest
     {
+        private static readonly Fixture AutoGenerator = new Fixture();
+
         private const string EggTitle = "The Better Egg";
         private const string EggCodeText = "THE_CODE";
         private readonly CatalogItemCode _eggCode = new CatalogItemCode(EggCodeText);
 
+        private readonly CatalogItemCode _firstCode = new CatalogItemCode(AutoGenerator.Create<string>());
+        private readonly CatalogItemCode _secondCode = new CatalogItemCode(AutoGenerator.Create<string>());
+
         private const string SomeTitle = "Title";
-        const string FirstTitle = "FIRST TITLE";
-        const string SecondTitle = "SECOND TITLE";
 
         private Mock<CatalogItemFactory> _itemFactory;
 
@@ -36,33 +40,30 @@ namespace CleanCart.ApplicationServices.Tests.Assemblers
         [TestMethod]
         public void ToDTOShouldMapTheTitle()
         {
-            var catalogItem = CreateCatalogItemMock(_eggCode, EggTitle);
-            var dto = _itemAssembler.ToDto(catalogItem.Object);
-            dto.Title.Should().Be(EggTitle);
+            var catalogItem = CreateCatalogItemMock(AutoGenerator.Create<CatalogItemCode>(), EggTitle);
+            var dtoReturned = _itemAssembler.ToDto(catalogItem.Object);
+            dtoReturned.Title.Should().Be(EggTitle);
         }
 
         [TestMethod]
         public void ToDTOShouldMapTheCode()
         {
             var catalogItem = CreateCatalogItemMock(_eggCode, SomeTitle);
-
-            var dto = _itemAssembler.ToDto(catalogItem.Object);
-
-            var dtoCode = new CatalogItemCode(dto.CodeText);
-            dtoCode.Should().Be(_eggCode);
+            var dtoReturned = _itemAssembler.ToDto(catalogItem.Object);
+            dtoReturned.CodeText.Should().Be(_eggCode.CodeValue);
         }
 
         [TestMethod]
         public void ToDTOListShouldMapForAllItemsInSameOrder()
         {
-            var catalogItems = new List<CatalogItem> {CreateCatalogItemMock(FirstTitle).Object, 
-                                                      CreateCatalogItemMock(SecondTitle).Object};
+            var catalogItems = new List<CatalogItem> {CreateCatalogItemMock(_firstCode).Object, 
+                                                      CreateCatalogItemMock(_secondCode).Object};
 
             var dtos = _itemAssembler.ToDtoList(catalogItems);
 
-            dtos.ElementAt(0).Title.Should().Be(FirstTitle);
-            dtos.ElementAt(1).Title.Should().Be(SecondTitle);
             dtos.Should().HaveCount(catalogItems.Count);
+            dtos.ElementAt(0).CodeText.Should().Be(_firstCode.CodeValue);
+            dtos.ElementAt(1).CodeText.Should().Be(_secondCode.CodeValue);
         }
 
         [TestMethod]
@@ -92,10 +93,9 @@ namespace CleanCart.ApplicationServices.Tests.Assemblers
         }
 
 
-        private Mock<CatalogItem> CreateCatalogItemMock(string title)
+        private Mock<CatalogItem> CreateCatalogItemMock(CatalogItemCode code)
         {
-            var code = new CatalogItemCode(EggCodeText);
-            return CreateCatalogItemMock(code, title);
+            return CreateCatalogItemMock(code, AutoGenerator.Create<string>());
         }
 
         private Mock<CatalogItem> CreateCatalogItemMock(CatalogItemCode code, string title)
