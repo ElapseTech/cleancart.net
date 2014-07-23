@@ -132,7 +132,7 @@ namespace CleanCart.AcceptanceTests.Steps
             {
                 _shopCatalogService.AddCatalogItem(newItemDTO);
             }
-            catch (CatalogItemCreationException e)
+            catch (CatalogItemCreationException)
             {
                 _errorIsReported = true;
             }
